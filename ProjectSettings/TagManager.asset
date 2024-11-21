@@ -6,6 +6,9 @@ TagManager:
   tags:
   - user
   - GroupPrehub
+  - UserName
+  - KitakuSelector
+  - KitakuDateTime
   layers:
   - Default
   - TransparentFX

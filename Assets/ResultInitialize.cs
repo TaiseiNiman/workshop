@@ -1,20 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using System;
 
-public class KitakuSceneButton : MonoBehaviour
+public class ResultInitialize : MonoBehaviour
 {
-
-    public OnButtonWithErrorMessage submitaa;
-
     // Start is called before the first frame update
-    public void KitakuSceneMoverOnClick()
-    {
-
-        submitaa.MoveSceneNumber = gameObject.name;
-    }
     void Start()
     {
         
@@ -25,4 +15,5 @@ public class KitakuSceneButton : MonoBehaviour
     {
         
     }
+   
 }
