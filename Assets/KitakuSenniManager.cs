@@ -34,27 +34,64 @@ public class KitakuSenniManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+        //自動遷移を実装する
+        if (!ContainsOtherThanOne(kitakuStateId) && isResult)
         {
-            KitakuSenniUpdate(KitakuStateId + "1", true);//自動更新
-            IsResult = true;
+            //今、リザルト画面を表示しています
+            //12時,13時...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            {
+                KitakuSenniUpdate(KitakuStateId);//自動更新
+            }
+            IsResult = !IsResult;
         }
+        else if (!ContainsOtherThanOne(kitakuStateId))
+        {
+            //今、帰宅選択画面を表示しています
+            //11時45分,12時45分,...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            {
+                KitakuSenniUpdate(KitakuStateId);//自動更新
+            }
+            IsResult = !IsResult;
+        }
+        else
+        {
+            //今、帰宅状況の画像を表示しています
+            //11時,12時,...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            {
+                if (string.IsNullOrEmpty(str))
+                {
+                    throw new System.ArgumentException("The string cannot be null or empty.");
+                }
+                
+                KitakuSenniUpdate(kitakuStateId + kitakuStateId[kitakuStateId.Length - 1]);//自動更新
+            }
+            IsResult = !IsResult;
+        }
+
+        
     }
     //帰宅遷移状況を表示するゲームオブジェクトを更新する
-    public void KitakuSenniUpdate(string kitakuStateId, bool isResult)
+    public void KitakuSenniUpdate(string SelectNumber)
     {
+        //帰宅遷移状況を更新
+        KitakuStateId += SelectNumber;
         //プレハブのインスタンスを破棄
         foreach (Transform child in transform)
+
         { 
            //子要素を破棄
            Destroy(child.gameObject);
             
         }
 
-        if (!ContainsOtherThanOne(kitakuStateId) && isResult) {
+        if (!ContainsOtherThanOne(KitakuStateId) && isResult) {
             activePrefab = selectorResultPrefab;
+            IsResult = false;
         }
-        else if (!ContainsOtherThanOne(kitakuStateId))
+        else if (!ContainsOtherThanOne(KitakuStateId))
         {
             activePrefab = selectorPrefab;
         }
@@ -75,9 +112,7 @@ public class KitakuSenniManager : MonoBehaviour
         // インスタンスをこのオブジェクトの子要素として設定
         instance.transform.parent = this.transform;
 
-        //帰宅遷移状況を更新
-        KitakuStateId = kitakuStateId;
-        IsResult = isResult;
+        
 
 
 
