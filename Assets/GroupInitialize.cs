@@ -8,8 +8,9 @@ public class GroupInitialize : MonoBehaviour
 {
     // Start is called before the first frame update
     public KitakuSenniInitialize Senni;
+    public TMP_Text title;
 
-    void Awake()
+    void Start()
     {
         Initialized();
     }
@@ -22,6 +23,6 @@ public class GroupInitialize : MonoBehaviour
 
     public void Initialized()//‰Šú‰»‚ğs‚¤
     {
-        gameObject.GetComponent<TMP_Text>().text = Senni.userName;
+        title.text = Senni.userName;
     }
 }

@@ -25,6 +25,7 @@ public class OnButtonWithErrorMessage : MonoBehaviour
 
     public void OnButtonClick()
     {
+        int num;
         foreach (char c in SceneObject.name)
         {
             if (c != '1')
@@ -34,7 +35,17 @@ public class OnButtonWithErrorMessage : MonoBehaviour
         }
         if (true)//Example != null && Example.elapsedTime > 0f
         {
-            move?.Invoke(1);//
+            // int.TryParse‚ðŽg—p‚·‚é•û–@
+            if (int.TryParse(MoveSceneNumber, out num))
+            {
+                Debug.Log("int.TryParse: " + num);
+                move?.Invoke(num);//
+            }
+            else
+            {
+                Debug.Log("•ÏŠ·‚ÉŽ¸”s‚µ‚Ü‚µ‚½");
+            }
+            
         }
     }
 }

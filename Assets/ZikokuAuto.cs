@@ -10,12 +10,12 @@ public class ZikokuAuto : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        tex.text = (kitakuScene.name.Length + 10).ToString() + "Žž‘ä";
     }
 
     void OnEnable()
     {
-        tex.text = (kitakuScene.name.Length + 10).ToString() + "Žž‘ä";
+        
         
     }
 

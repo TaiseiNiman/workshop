@@ -54,7 +54,7 @@ public class KitakuSenniManager : MonoBehaviour
             //11時45分,12時45分,...となったら自動で遷移
             if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 10, 45, 0))
             {
-                KitakuSenniUpdate(1);//自動更新
+                KitakuSenniUpdate(0);//自動更新 0は空文字列を意味する
             }
             
         }
@@ -94,7 +94,7 @@ public class KitakuSenniManager : MonoBehaviour
     public void KitakuSenniUpdate(int SelectNumber)
     {
         //帰宅遷移状況を更新
-        KitakuStateId += SelectNumber.ToString();
+        KitakuStateId += SelectNumber == 0 ? string.Empty : SelectNumber.ToString();
         IsResult = !IsResult;
         //プレハブのインスタンスを破棄
         foreach (Transform child in transform)
