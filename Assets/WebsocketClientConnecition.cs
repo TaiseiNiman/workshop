@@ -36,8 +36,17 @@ public class WebsocketClientConnecition : MonoBehaviour
                 message = messageQueue.Dequeue();
             }
             Debug.Log("Dequeued message: " + message);
-            //onMessage1.Invoke(message);
-            GameObject.Find("SimulationWatch").GetComponent<DateTimeSync>().GetTimer(message);
+
+            if (path == "Timer") {
+                GameObject.Find("SimulationWatch").GetComponent<DateTimeSync>().GetTimer(message);
+            }
+            else if(path == "Notification")
+            {
+                GameObject.Find("SimulationStartScreen").GetComponent<simulationStartNotification>().notification(message);
+                GameObject.Find("SimulationStartScreen").GetComponent<simulationStartNotification>().StartNotification(message);
+            }
+            
+            
         }
     }
 
@@ -65,13 +74,14 @@ public class WebsocketClientConnecition : MonoBehaviour
         ws.OnError += (sender, e) =>
         {
             Debug.LogError("Error: " + e.Message);
-            StartCoroutine(Reconnect(ServerIp, Port));
+            Debug.LogError($"WebSocket Error: {e.Message}, Exception: {e.Exception}");
+            Reconnect(ServerIp, Port);
         };
 
         ws.OnClose += (sender, e) =>
         {
             Debug.Log("Connection closed!");
-            StartCoroutine(Reconnect(ServerIp, Port));
+           Reconnect(ServerIp, Port);
         };
 
         ws.ConnectAsync();

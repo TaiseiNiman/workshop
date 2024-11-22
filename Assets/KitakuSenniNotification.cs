@@ -10,7 +10,7 @@ public class KitakuSenniNotification : MonoBehaviour
 
     public float elapsedTime = 0f;
 
-    void OnEnable()
+    void Start()
     {
         // 初期化
         if (timerText == null)
@@ -21,10 +21,6 @@ public class KitakuSenniNotification : MonoBehaviour
         UnityEngine.Debug.Log("オブジェクトがアクティブになりました！");
     }
 
-    void Start()
-    {
-        // 必要な初期化処理があればここに記述
-    }
 
     void Update()
     {

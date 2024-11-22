@@ -6,10 +6,17 @@ public class OnButtonWithErrorMessage : MonoBehaviour
 {
     public ExampleScript Example;
     [SerializeField]
-    public UnityEvent<string, bool> move;
+    public UnityEvent<int> move;
     public string MoveSceneNumber;//
     public GameObject SceneObject;//
     private bool isResult = true;
+    //public GameObject ActiveScreenObject;
+
+    void Awake()
+    {
+        //ÉäÉXÉiÅ[ÇÃê›íË
+        move.AddListener(SceneObject.GetComponent<KitakuSenniInitialize>().ActiveScreenObject.GetComponent<KitakuSenniManager>().KitakuSenniUpdate);
+    }
 
     void Update()
     {
@@ -27,7 +34,7 @@ public class OnButtonWithErrorMessage : MonoBehaviour
         }
         if (true)//Example != null && Example.elapsedTime > 0f
         {
-            move?.Invoke(SceneObject.name+ MoveSceneNumber, isResult);
+            move?.Invoke(1);//
         }
     }
 }

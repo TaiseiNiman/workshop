@@ -10,9 +10,9 @@ public class SpriteLoader : MonoBehaviour
     public Image targetImage; // スプライトを表示するImageコンポーネント
     public GameObject kitakuScene;
 
-    void OnEnable()
+    void Start()
     {
-        string inputString = kitakuScene.name; // 例としての入力文字列
+        string inputString = kitakuScene.name.ToString(); // 例としての入力文字列
         Sprite targetSprite = GetTargetSprite(inputString);
         if (targetSprite != null)
         {

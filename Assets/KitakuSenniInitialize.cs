@@ -5,6 +5,8 @@ using TMPro;
 
 public class KitakuSenniInitialize : MonoBehaviour
 {
+    public string userName;
+    public GameObject ActiveScreenObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,24 +18,12 @@ public class KitakuSenniInitialize : MonoBehaviour
     {
         
     }
-    public void initialize(string id, string userName, bool isResult)
+    public void initialize(string id, string user, bool isResult,GameObject obj)
     {
-        //
-        //帰宅状況を選ぶbuttonオブジェクトの初期化
-        var kitaku = GetChildrenWithTag("KitakuSelector");
-
-        //ユーザーの名前の初期化
-        var users = GetChildrenWithTag("UserName");
-        foreach (GameObject user in users)
-        {
-            user.GetComponent<TMP_Text>().text = userName;//ユーザー名を指定
-        }
-        //時間帯の初期化
-        var dateTime = GetChildrenWithTag("KitakuDateTime");
-        foreach (GameObject time in dateTime)
-        {
-            //time.GetComponent<TMP_Text>().text = (id.Length+10).ToString() + "時台";//時間帯を指定
-        }
+        //初期化
+        userName = user;
+        gameObject.name = id;
+        ActiveScreenObject = obj;
     }
     List<GameObject> GetChildrenWithTag(string tag)
     {

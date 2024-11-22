@@ -12,11 +12,14 @@ public class KitakuSenniManager : MonoBehaviour
     public GameObject ImagePrefab;//帰宅状況画像の表示画面
     //プレハブの初期化メソッドを追加
     [SerializeField]
-    public UnityEvent<string, string,bool> initiailze;
+    public UnityEvent<string,string,bool,GameObject> initiailze;
+    //シミュレーション自動終了時に実行されるイベントメソッドを指定
+    [SerializeField]
+    public UnityEvent simulationOnClose;
     //プレハブ初期化変数
     public string userName;
     public string KitakuStateId;
-    public bool IsResult;
+    public bool IsResult = true;
     //時間を取得
     public DateTimeSync current;
 
@@ -35,25 +38,25 @@ public class KitakuSenniManager : MonoBehaviour
     void Update()
     {
         //自動遷移を実装する
-        if (!ContainsOtherThanOne(kitakuStateId) && isResult)
+        if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
         {
             //今、リザルト画面を表示しています
             //12時,13時...となったら自動で遷移
             if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
             {
-                KitakuSenniUpdate(KitakuStateId);//自動更新
+                KitakuSenniUpdate(1);//自動更新
             }
-            IsResult = !IsResult;
+            
         }
-        else if (!ContainsOtherThanOne(kitakuStateId))
+        else if (!ContainsOtherThanOne(KitakuStateId))
         {
             //今、帰宅選択画面を表示しています
             //11時45分,12時45分,...となったら自動で遷移
-            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 10, 45, 0))
             {
-                KitakuSenniUpdate(KitakuStateId);//自動更新
+                KitakuSenniUpdate(1);//自動更新
             }
-            IsResult = !IsResult;
+            
         }
         else
         {
@@ -61,23 +64,38 @@ public class KitakuSenniManager : MonoBehaviour
             //11時,12時,...となったら自動で遷移
             if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
             {
-                if (string.IsNullOrEmpty(str))
+                if (string.IsNullOrEmpty(KitakuStateId))
                 {
                     throw new System.ArgumentException("The string cannot be null or empty.");
                 }
                 
-                KitakuSenniUpdate(kitakuStateId + kitakuStateId[kitakuStateId.Length - 1]);//自動更新
+                KitakuSenniUpdate(KitakuStateId[KitakuStateId.Length - 1]);//自動更新
             }
-            IsResult = !IsResult;
+            
         }
+        //25時で自動的にシミュレーションを終了させる
+        if(current.currentTime > new DateTime(1997, 7, 2, 1, 0, 0))
+        {
+            //シミュレーションを終了させるので帰宅状況を破棄する
+            foreach (Transform child in transform)
+
+            {
+                //子要素を破棄
+                Destroy(child.gameObject);
+
+            }
+            //シュミレーションクローズイベントリスナーの実行
+            simulationOnClose?.Invoke();
+        } 
 
         
     }
     //帰宅遷移状況を表示するゲームオブジェクトを更新する
-    public void KitakuSenniUpdate(string SelectNumber)
+    public void KitakuSenniUpdate(int SelectNumber)
     {
         //帰宅遷移状況を更新
-        KitakuStateId += SelectNumber;
+        KitakuStateId += SelectNumber.ToString();
+        IsResult = !IsResult;
         //プレハブのインスタンスを破棄
         foreach (Transform child in transform)
 
@@ -87,9 +105,8 @@ public class KitakuSenniManager : MonoBehaviour
             
         }
 
-        if (!ContainsOtherThanOne(KitakuStateId) && isResult) {
+        if (!ContainsOtherThanOne(KitakuStateId) && IsResult) {
             activePrefab = selectorResultPrefab;
-            IsResult = false;
         }
         else if (!ContainsOtherThanOne(KitakuStateId))
         {
@@ -101,16 +118,33 @@ public class KitakuSenniManager : MonoBehaviour
         }
 
         //プレハブを初期化しインスタンスを初期化しているように見せかける
-        initiailze?.Invoke(kitakuStateId, userName, isResult);
+        initiailze?.Invoke(KitakuStateId,userName,IsResult,gameObject);
 
         // プレハブをインスタンス化
-        GameObject instance = Instantiate(activePrefab);
+        GameObject instance = Instantiate(activePrefab, gameObject.transform);
+        RectTransform rectTransform = instance.GetComponent<RectTransform>();
 
-        //インスタンスの名前を変更
-        instance.name = KitakuStateId;
+        if (rectTransform != null)
+        {
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+        }
+        else
+        {
+            Debug.LogError("RectTransform component not found on prefab.");
+        }
+
+
+        KitakuSenniInitialize test = instance.GetComponent<KitakuSenniInitialize>();
+        test.userName = userName;
+        test.gameObject.name = KitakuStateId;
+        test.ActiveScreenObject = gameObject;
 
         // インスタンスをこのオブジェクトの子要素として設定
-        instance.transform.parent = this.transform;
+        instance.transform.SetParent(this.transform, false);
+        instance.SetActive(true);
 
         
 
