@@ -21,7 +21,7 @@ public class ExampleScript : MonoBehaviour
         if (timerText == null)
         {
             UnityEngine.Debug.LogError("TextMeshProのテキストコンポーネントがアタッチされていません！");
-            elapsedTime = 0f;
+            
         }
         UnityEngine.Debug.Log("オブジェクトがアクティブになりました！");
     }
@@ -48,12 +48,12 @@ public class ExampleScript : MonoBehaviour
         }
         else
         {
-            limit = true; // 通常の速度
+            elapsedTime = 0f;//時刻を初期化
         }
 
         if (Mathf.FloorToInt(elapsedTime) % 1 == 0 && limit)
         {
-            timerText.text = "残り" + (15 - Mathf.FloorToInt(elapsedTime)).ToString() + "秒です。次に進むボタンを押してください.";
+            timerText.text = "残り" + (14 - Mathf.FloorToInt(elapsedTime)).ToString() + "秒です　　次に進んで下さい.";
         }
 
     }

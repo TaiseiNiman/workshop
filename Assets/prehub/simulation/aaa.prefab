@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ce292c5c74c734abecfd3d9111d60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userName: "\u30B0\u30EB\u30FC\u30D74"
+  userName: D
   ActiveScreenObject: {fileID: 0}
 --- !u!1 &2023658060328634252
 GameObject:
@@ -451,6 +451,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 8614605487245324136}
   SceneObject: {fileID: 1332905079588962833}
+  myImage: {fileID: 0}
   elapsedTime: 0
 --- !u!1 &7328702684613709389
 GameObject:

@@ -13,7 +13,7 @@ public class KitakuSceneButton : MonoBehaviour
     public void KitakuSceneMoverOnClick()
     {
 
-        submitaa.MoveSceneNumber = gameObject.name;
+        submitaa.MoveSceneNumber = (gameObject.name == "1")? "0" : gameObject.name;
     }
     void Start()
     {

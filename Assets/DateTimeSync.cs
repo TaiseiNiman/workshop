@@ -28,7 +28,7 @@ public class DateTimeSync : MonoBehaviour
         if (success)
         {
             Debug.Log("Converted DateTime: " + dateTime);
-            timerText.text = $"Œ»İ‚Ì: {dateTime:HHmm•ªss•b}";
+            timerText.text = $"Œ»İ‚Ì: {dateTime:HHmm•ª}";
             currentTime = dateTime;
         }
         else

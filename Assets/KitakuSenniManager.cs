@@ -37,12 +37,17 @@ public class KitakuSenniManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        int num;
+        int hour;
+        int day;
         //自動遷移を実装する
         if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
         {
+            hour = (KitakuStateId.Length + 11) % 24;
+            day = (KitakuStateId.Length + 11) / 24;
             //今、リザルト画面を表示しています
             //12時,13時...となったら自動で遷移
-            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
             {
                 KitakuSenniUpdate(1);//自動更新
             }
@@ -50,9 +55,11 @@ public class KitakuSenniManager : MonoBehaviour
         }
         else if (!ContainsOtherThanOne(KitakuStateId))
         {
+            hour = (KitakuStateId.Length + 10) % 24;
+            day = (KitakuStateId.Length + 10) / 24;
             //今、帰宅選択画面を表示しています
             //11時45分,12時45分,...となったら自動で遷移
-            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 10, 45, 0))
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 45, 0))
             {
                 KitakuSenniUpdate(0);//自動更新 0は空文字列を意味する
             }
@@ -60,16 +67,24 @@ public class KitakuSenniManager : MonoBehaviour
         }
         else
         {
+            hour = (KitakuStateId.Length + 10) % 24;
+            day = (KitakuStateId.Length + 10) / 24;
             //今、帰宅状況の画像を表示しています
             //11時,12時,...となったら自動で遷移
-            if (current.currentTime > new DateTime(1997, 7, 1, KitakuStateId.Length + 11, 0, 0))
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
             {
-                if (string.IsNullOrEmpty(KitakuStateId))
+                if (!string.IsNullOrEmpty(KitakuStateId))
                 {
+                    num = (int)char.GetNumericValue(KitakuStateId[KitakuStateId.Length - 1]);
+                    Debug.Log($"Character '{KitakuStateId[KitakuStateId.Length - 1]}' converted to int: {num}");
+                    KitakuSenniUpdate(num);
+                }
+                else
+                {
+                    
                     throw new System.ArgumentException("The string cannot be null or empty.");
                 }
-                
-                KitakuSenniUpdate(KitakuStateId[KitakuStateId.Length - 1]);//自動更新
+
             }
             
         }
@@ -93,6 +108,9 @@ public class KitakuSenniManager : MonoBehaviour
     //帰宅遷移状況を表示するゲームオブジェクトを更新する
     public void KitakuSenniUpdate(int SelectNumber)
     {
+        //ジェネリックTの型がintかstringかによって処理を分ける.
+        
+
         //帰宅遷移状況を更新
         KitakuStateId += SelectNumber == 0 ? string.Empty : SelectNumber.ToString();
         IsResult = !IsResult;

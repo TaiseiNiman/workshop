@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4943738793642397880}
   - component: {fileID: 801425928200473838}
   - component: {fileID: 3255566029856278339}
+  - component: {fileID: 324581589608716684}
   m_Layer: 5
   m_Name: 5
   m_TagString: Untagged
@@ -147,6 +148,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitaa: {fileID: 5163144226172546053}
+--- !u!114 &324581589608716684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 98442220109143099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 801425928200473838}
 --- !u!1 &140946563946092794
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,6 +174,7 @@ GameObject:
   - component: {fileID: 7412347216928602314}
   - component: {fileID: 5627102939476513135}
   - component: {fileID: 5173875046795075562}
+  - component: {fileID: 4464344492984177655}
   m_Layer: 5
   m_Name: 4
   m_TagString: Untagged
@@ -184,7 +199,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -178.14, y: 43.227}
+  m_AnchoredPosition: {x: -173.12, y: 40}
   m_SizeDelta: {x: 524.151, y: 64.773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8846934123171307100
@@ -269,7 +284,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6133879585355964293}
+      - m_Target: {fileID: 6247283343945395339}
         m_TargetAssemblyTypeName: Onactive, Assembly-CSharp
         m_MethodName: OnActive
         m_Mode: 1
@@ -294,6 +309,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitaa: {fileID: 5163144226172546053}
+--- !u!114 &4464344492984177655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140946563946092794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 5627102939476513135}
 --- !u!1 &154479073489787038
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +677,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -670,6 +698,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 5423637086198906132}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 4444450067979235762}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -697,9 +727,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -878,7 +968,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -899,6 +989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 8139104168893139956}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 6324702886500470425}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -926,9 +1018,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1005,8 +1157,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1085,6 +1237,7 @@ GameObject:
   - component: {fileID: 3198142959360416557}
   - component: {fileID: 3325895079867488756}
   - component: {fileID: 1717771546978607290}
+  - component: {fileID: 6224567718624201599}
   m_Layer: 5
   m_Name: 3
   m_TagString: Untagged
@@ -1219,6 +1372,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitaa: {fileID: 5163144226172546053}
+--- !u!114 &6224567718624201599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 780801193696807861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 3325895079867488756}
 --- !u!1 &833303768733294257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1419,7 +1585,7 @@ GameObject:
   - component: {fileID: 1339668971751118001}
   - component: {fileID: 5676043693723229994}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput (4)
+  m_Name: ServerCreatePasswardInput3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1711,7 +1877,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1212017956062299220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 27b004cae555b874fa999f9f690a6ddf, type: 3}
   m_Name: 
@@ -2021,7 +2187,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -2042,6 +2208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 3765530155551614111}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 1628848506794574364}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -2069,9 +2237,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2512,7 +2740,7 @@ GameObject:
   - component: {fileID: 20087232458263957}
   - component: {fileID: 6247283343945395339}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput (2)
+  m_Name: ServerCreatePasswardInput4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2894,6 +3122,7 @@ GameObject:
   - component: {fileID: 4806545458284923899}
   - component: {fileID: 5322911520525928274}
   - component: {fileID: 1126326847972101776}
+  - component: {fileID: 7667581282088669778}
   m_Layer: 5
   m_Name: 2
   m_TagString: Untagged
@@ -3028,6 +3257,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitaa: {fileID: 5163144226172546053}
+--- !u!114 &7667581282088669778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130296906192850478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 5322911520525928274}
 --- !u!1 &2352586882727501946
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,7 +3439,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -3218,6 +3460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 4728449581104710708}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 7135705556385201507}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -3245,9 +3489,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3533,8 +3837,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3613,6 +3917,7 @@ GameObject:
   - component: {fileID: 1623047264776661625}
   - component: {fileID: 1869583723132293084}
   - component: {fileID: 4089688454074459640}
+  - component: {fileID: 6834877777987792930}
   m_Layer: 5
   m_Name: 1
   m_TagString: Untagged
@@ -3747,6 +4052,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   submitaa: {fileID: 5163144226172546053}
+--- !u!114 &6834877777987792930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775409556123522693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 1869583723132293084}
 --- !u!1 &3123581892064046314
 GameObject:
   m_ObjectHideFlags: 0
@@ -3815,8 +4133,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4071,7 +4389,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -4092,6 +4410,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 1475490124235164170}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 4749423230539753048}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -4119,9 +4439,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4251,8 +4631,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4740,8 +5120,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5027,7 +5407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4345385206567279527}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
   m_Name: 
@@ -5069,12 +5449,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4345385206567279527}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4ce292c5c74c734abecfd3d9111d60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userName: "\u30B0\u30EB\u30FC\u30D74"
+  userName: D
   ActiveScreenObject: {fileID: 0}
 --- !u!1 &4444450067979235762
 GameObject:
@@ -5090,7 +5470,7 @@ GameObject:
   - component: {fileID: 3718239958386918656}
   - component: {fileID: 4334445062248110331}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput
+  m_Name: ServerCreatePasswardInput1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5362,7 +5742,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_RestoreOriginalTextOnEscape: 1
@@ -5383,6 +5763,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 3407562973404701784}
   correctPassword: aiueo
+  KitakuSceneObject: {fileID: 4345385206567279527}
+  PasswordObject: {fileID: 991858485910137641}
   correctM:
     m_PersistentCalls:
       m_Calls:
@@ -5410,9 +5792,69 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ButtonOnOff, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 6224567718624201599}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: OnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6834877777987792930}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7667581282088669778}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4464344492984177655}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 324581589608716684}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5062457236206326832}
+        m_TargetAssemblyTypeName: ChangeButtonColor, Assembly-CSharp
+        m_MethodName: NotClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5600,6 +6042,7 @@ GameObject:
   - component: {fileID: 2313007836444150990}
   - component: {fileID: 4682369445592404300}
   - component: {fileID: 4394875979125396359}
+  - component: {fileID: 5062457236206326832}
   m_Layer: 5
   m_Name: 6
   m_TagString: Untagged
@@ -5624,7 +6067,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -137.18, y: -110.45}
+  m_AnchoredPosition: {x: -137.18, y: -103.45}
   m_SizeDelta: {x: 658.714, y: 64.773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3760520713330205360
@@ -5747,6 +6190,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SceneObject: {fileID: 4345385206567279527}
+--- !u!114 &5062457236206326832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4627878844539833858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1f46e32d1a2e4d42bbe409a9fee0995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myButton: {fileID: 2313007836444150990}
 --- !u!1 &4695316572424123624
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,7 +6350,7 @@ GameObject:
   - component: {fileID: 1916263619147909608}
   - component: {fileID: 3141314992045621168}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput (5)
+  m_Name: ServerCreatePasswardInput6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6502,8 +6958,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 297.64, y: 146.44}
-  m_SizeDelta: {x: 364.725, y: 133.9}
+  m_AnchoredPosition: {x: 337, y: 175.77948}
+  m_SizeDelta: {x: 235.8, y: 99.2944}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4547177238831423287
 CanvasRenderer:
@@ -6563,11 +7019,11 @@ MonoBehaviour:
   m_fontSize: 40
   m_fontSizeBase: 40
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6685,8 +7141,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6920,7 +7376,7 @@ GameObject:
   - component: {fileID: 5097535279212588131}
   - component: {fileID: 8111917687528977073}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput (3)
+  m_Name: ServerCreatePasswardInput5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7057,9 +7513,9 @@ RectTransform:
   - {fileID: 1684684550176306416}
   - {fileID: 3513242495011027364}
   - {fileID: 8947448504299554528}
+  - {fileID: 1229141707105427871}
   - {fileID: 848703394890133843}
   - {fileID: 8920206715010765933}
-  - {fileID: 1229141707105427871}
   - {fileID: 6897216211751331211}
   m_Father: {fileID: 6508670088400038887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7262,8 +7718,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7417,8 +7873,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7518,7 +7974,7 @@ GameObject:
   - component: {fileID: 7411181567521600538}
   - component: {fileID: 6133879585355964293}
   m_Layer: 0
-  m_Name: ServerCreatePasswardInput (1)
+  m_Name: ServerCreatePasswardInput2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7738,7 +8194,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u793E\u7528\u8ECA"
+  m_text: "\u5E30\u5B85\u3059\u308B\uFF1A\u793E\u7528\u8ECA"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
@@ -7874,8 +8330,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8279,8 +8735,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Enter Passward...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8433,8 +8889,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8834,8 +9290,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u200B"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
+  m_sharedMaterial: {fileID: 8381872095122513313, guid: 0ccf4d51d5c3f9b47ba9100b312a1e99, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

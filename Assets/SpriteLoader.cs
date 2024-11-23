@@ -62,7 +62,8 @@ public class SpriteLoader : MonoBehaviour
         else
         {
             Debug.LogWarning("指定されたインデックスにスプライトが存在しません: " + targetIndex);
-            return null;
+            Debug.LogWarning("シミュレーションを終了させます");
+            return Resources.LoadAll<Sprite>("Image/SimulationEndSprites")[0];
         }
     }
 
