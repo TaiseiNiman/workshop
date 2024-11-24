@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -10,7 +10,7 @@ public class ZikokuAuto : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tex.text = (kitakuScene.name.Length + 10).ToString() + "éûë‰";
+        tex.text = (kitakuScene.name.Length + 10).ToString() + "ÊôÇÂè∞";
     }
 
     void OnEnable()

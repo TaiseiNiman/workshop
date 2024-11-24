@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,27 +8,27 @@ public class SimulationWatch : MonoBehaviour
 {
 
     private Stopwatch stopwatch;
-    public TMP_Text timerText; // Œo‰ßŠÔ‚ğ•\¦‚·‚éUIƒeƒLƒXƒg
+    public TMP_Text timerText; // çµŒéæ™‚é–“ã‚’è¡¨ç¤ºã™ã‚‹UIãƒ†ã‚­ã‚¹ãƒˆ
     private DateTime startTime;
     public TimeSpan elapsed;
     public DateTime currentTime;
 
     void OnEnable()
     {
-        // ƒXƒgƒbƒvƒEƒHƒbƒ`‚ğŠJn
+        // ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã‚’é–‹å§‹
         stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        // “Á’è‚Ì‚ğİ’èi11j
+        // ç‰¹å®šã®æ™‚åˆ»ã‚’è¨­å®šï¼ˆ11æ™‚ï¼‰
         startTime = new DateTime(1997, 7, 1, 11, 0, 0);
     }
 
     void Update()
     {
-        // Œo‰ßŠÔ‚ğæ“¾
+        // çµŒéæ™‚é–“ã‚’å–å¾—
         elapsed = stopwatch.Elapsed;
         
-        // “Á’è‚Ì‚ÉŒo‰ßŠÔ‚ğ‰ÁZ
+        // ç‰¹å®šã®æ™‚åˆ»ã«çµŒéæ™‚é–“ã‚’åŠ ç®—
         if (new DateTime(1997, 7, 1, 20, 0, 0) <= startTime.Add(elapsed * 20))
         {
             currentTime = startTime.Add((elapsed*20 - new TimeSpan(9, 0, 0)) * (40/20) + new TimeSpan(9, 0, 0));
@@ -38,13 +38,13 @@ public class SimulationWatch : MonoBehaviour
             currentTime = startTime.Add(elapsed * 20);
         }
 
-        // ‚ğ•\¦
-        timerText.text = $"Œ»İ‚Ì: {currentTime:HHmm•ªss•b}";
+        // æ™‚åˆ»ã‚’è¡¨ç¤º
+        timerText.text = $"ç¾åœ¨ã®æ™‚åˆ»: {currentTime:HHæ™‚mmåˆ†ssç§’}";
     }
 
     void OnDestroy()
     {
-        // ƒXƒgƒbƒvƒEƒHƒbƒ`‚ğ’â~
+        // ã‚¹ãƒˆãƒƒãƒ—ã‚¦ã‚©ãƒƒãƒã‚’åœæ­¢
         if (stopwatch != null)
         {
             stopwatch.Stop();

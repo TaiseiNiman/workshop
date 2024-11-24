@@ -9,16 +9,16 @@ namespace MyProject
 {
     public class DragAndDrop : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        //w’è‚³‚ê‚½UIƒIƒuƒWƒFƒNƒg‚Ì—Ìˆæ‚É“ü‚Á‚½‚Æ‚«‚É‚»‚Ìî•ñ‚ğ•Ï”‚ÉŠi”[‚·‚éB•Ï”‚ÍsetƒL[ƒ[ƒh‚ğ—p‚¢‚Ä•Ï”‚Ì’l‚ª•Ï‚í‚Á‚½‚Æ‚«‚ÉŒÄ‚Ño‚³‚ê‚éƒCƒxƒ“ƒg‚ğİ’è‚·‚é.
+        //ï¿½wï¿½è‚³ï¿½ê‚½UIï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì—Ìˆï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½É‚ï¿½ï¿½Ìï¿½ï¿½ï¿½Ïï¿½ï¿½ÉŠiï¿½[ï¿½ï¿½ï¿½ï¿½Bï¿½Ïï¿½ï¿½ï¿½setï¿½Lï¿½[ï¿½ï¿½ï¿½[ï¿½hï¿½ï¿½pï¿½ï¿½ï¿½Ä•Ïï¿½ï¿½Ì’lï¿½ï¿½ï¿½Ï‚ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½ÉŒÄ‚Ñoï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½İ’è‚·ï¿½ï¿½.
         [System.Serializable]
         public class MyEvent : UnityEvent<GameObject, Canvas, RectTransform> { }
         [SerializeField]
-        public MyEvent OnDropTrigger;//ƒCƒxƒ“ƒg‚ğİ’è
-        /* ƒhƒ‰ƒbƒOI—¹‚É”CˆÓ‚ÌƒIƒuƒWƒFƒNƒg‚Ì—Ìˆæ‚É­‚µ‚Å‚à“ü‚Á‚Ä‚¢‚é‚©’²‚×‚é‚½‚ß‚É
-         *  ’²‚×‚½‚¢ƒIƒuƒWƒFƒNƒg‚ğw’è‚·‚é.‚½‚¾‚µ,•¡”‚Ì—Ìˆæ‚É“ü‚Á‚Ä‚¢‚éê‡‚Í‚»‚Ì‚¤‚¿‚Ì‚Ç‚ê‚©ˆê‚Â‚Ì—Ìˆæ‚É“ü‚Á‚½‚Æ”F’è‚µ,‚»‚ê‚ª‰½‚Å‚ ‚é‚©‚ÍŒµŠi‚É‹K’è‚µ‚È‚¢.
+        public MyEvent OnDropTrigger;//ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½İ’ï¿½
+        /* ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½É”Cï¿½Ó‚ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ì—Ìˆï¿½Éï¿½ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚©ï¿½ï¿½ï¿½×‚é‚½ï¿½ß‚ï¿½
+         *  ï¿½ï¿½ï¿½×‚ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½wï¿½è‚·ï¿½ï¿½.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ì—Ìˆï¿½É“ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ê‡ï¿½Í‚ï¿½ï¿½Ì‚ï¿½ï¿½ï¿½ï¿½Ì‚Ç‚ê‚©ï¿½ï¿½Â‚Ì—Ìˆï¿½É“ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ”Fï¿½è‚µ,ï¿½ï¿½ï¿½ê‚ªï¿½ï¿½ï¿½Å‚ï¿½ï¿½é‚©ï¿½ÍŒï¿½ï¿½iï¿½É‹Kï¿½è‚µï¿½È‚ï¿½.
         */
-        public List<GameObject> triggerObjects;//—Ìˆæ”»’è‚ÌUIƒIƒuƒWƒFƒNƒg‚ğw’è.¦RectTransformƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ‚Á‚Ä‚¢‚é‚±‚Æ.
-        //ƒhƒ‰ƒbƒO•ƒhƒƒbƒv‚Å‚«‚écanvasƒIƒuƒWƒFƒNƒg‚ğw’è.‚±‚ÌƒRƒ“ƒ|[ƒlƒ“ƒg‚ğ—˜—p‚µ‚½‚¢UIƒIƒuƒWƒFƒNƒg‚Í•K‚¸‚±‚±‚Åw’è‚·‚écanvasƒIƒuƒWƒFƒNƒg‚Ìq—v‘f‚â‘·—v‘f‚â‚Ğ‘·—v‘f,...ˆÈ‰º‘±‚­‚É‚È‚Á‚Ä‚¢‚È‚¢‚Æ‚¢‚¯‚È‚¢.
+        public List<GameObject> triggerObjects;//ï¿½Ìˆæ”»ï¿½ï¿½ï¿½UIï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½wï¿½ï¿½.ï¿½ï¿½RectTransformï¿½Rï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½é‚±ï¿½ï¿½.
+        //ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½hï¿½ï¿½ï¿½bï¿½vï¿½Å‚ï¿½ï¿½ï¿½canvasï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½ï¿½wï¿½ï¿½.ï¿½ï¿½ï¿½ÌƒRï¿½ï¿½ï¿½|ï¿½[ï¿½lï¿½ï¿½ï¿½gï¿½ğ—˜—pï¿½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Í•Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Åwï¿½è‚·ï¿½ï¿½canvasï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Ìqï¿½vï¿½fï¿½â‘·ï¿½vï¿½fï¿½ï¿½Ğ‘ï¿½ï¿½vï¿½f,...ï¿½È‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É‚È‚ï¿½ï¿½Ä‚ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½ï¿½È‚ï¿½.
         public Canvas moveCanvas;
         private RectTransform rectTransform;
         private Canvas canvas;
@@ -34,14 +34,14 @@ namespace MyProject
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            // ƒhƒ‰ƒbƒOŠJn‚Ìˆ—
+            // ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½Jï¿½nï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
             originalPosition = rectTransform.anchoredPosition;
 
-            // UIƒIƒuƒWƒFƒNƒg‚ğ•¡»‚µAOpeningUI Canvas‚Ìq—v‘f‚Æ‚µ‚Ä’Ç‰Á
+            // UIï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ğ•¡ï¿½ï¿½ï¿½ï¿½AOpeningUI Canvasï¿½Ìqï¿½vï¿½fï¿½Æ‚ï¿½ï¿½Ä’Ç‰ï¿½
             duplicateObject = Instantiate(gameObject, moveCanvas.GetComponent<Canvas>().transform, false);
             duplicateRectTransform = duplicateObject.GetComponent<RectTransform>();
 
-            // •¡»ƒIƒuƒWƒFƒNƒg‚ÌˆÊ’u‚ÆƒTƒCƒY‚ğŒ³‚ÌƒIƒuƒWƒFƒNƒg‚Æ“¯‚¶‚Éİ’è
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÌˆÊ’uï¿½ÆƒTï¿½Cï¿½Yï¿½ï¿½ï¿½ï¿½ï¿½ÌƒIï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½Æ“ï¿½ï¿½ï¿½ï¿½Éİ’ï¿½
             duplicateRectTransform.position = rectTransform.position;
             duplicateRectTransform.rotation = rectTransform.rotation;
             duplicateRectTransform.localScale = rectTransform.localScale;
@@ -50,7 +50,7 @@ namespace MyProject
 
         public void OnDrag(PointerEventData eventData)
         {
-            // ƒhƒ‰ƒbƒO’†‚Ìˆ—
+            // ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
             if (duplicateRectTransform != null)
             {
                 duplicateRectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -59,11 +59,11 @@ namespace MyProject
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            // ƒhƒ‰ƒbƒOI—¹‚Ìˆ—
+            // ï¿½hï¿½ï¿½ï¿½bï¿½Oï¿½Iï¿½ï¿½ï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
             if (duplicateObject != null)
             {
-                OnDropTrigger?.Invoke(duplicateObject, canvas, duplicateRectTransform);//ƒCƒxƒ“ƒgƒŠƒXƒi[‚ğÀs
-                Destroy(duplicateObject);//•¡»ƒIƒuƒWƒFƒNƒg‚ğ”j‰ó
+                OnDropTrigger?.Invoke(duplicateObject, canvas, duplicateRectTransform);//ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½ï¿½ï¿½Xï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½s
+                Destroy(duplicateObject);//ï¿½ï¿½ï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ï¿½jï¿½ï¿½
             }
         }
 
@@ -71,7 +71,7 @@ namespace MyProject
         {
             if (OnDropTrigger == null || OnDropTrigger.GetPersistentEventCount() == 0)
             {
-                Debug.Log("ƒCƒxƒ“ƒg‚Éƒƒ\ƒbƒh‚ª’Ç‰Á‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+                Debug.Log("ï¿½Cï¿½xï¿½ï¿½ï¿½gï¿½Éƒï¿½ï¿½ï¿½bï¿½hï¿½ï¿½ï¿½Ç‰ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½ï¿½B");
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace MyProject
                     string methodName = OnDropTrigger.GetPersistentMethodName(i);
                     if (!string.IsNullOrEmpty(methodName))
                     {
-                        // ƒƒ\ƒbƒh‚Ìˆø”‚ÌŒ^‚ğw’è‚µ‚Äæ“¾
+                        // ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Ìˆï¿½ï¿½ï¿½ï¿½ÌŒ^ï¿½ï¿½ï¿½wï¿½è‚µï¿½Äæ“¾
                         MethodInfo method = target.GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic, null, new Type[] { typeof(GameObject) }, null);
                         if (method != null)
                         {

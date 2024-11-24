@@ -21,7 +21,7 @@ public class GroupInitialize : MonoBehaviour
         
     }
 
-    public void Initialized()//‰Šú‰»‚ğs‚¤
+    public void Initialized()//?????????s??
     {
         title.text = Senni.userName;
     }

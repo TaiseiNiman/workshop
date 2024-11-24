@@ -1,11 +1,11 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
 public class KitakuSenniNotification : MonoBehaviour
 {
-    public TMP_Text timerText; // TextMeshPro‚ÌƒeƒLƒXƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+    public TMP_Text timerText; // TextMeshProã®ãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
     public GameObject SceneObject;
     private DateTimeSync currentWatch;
     public Image myImage;
@@ -14,16 +14,16 @@ public class KitakuSenniNotification : MonoBehaviour
 
     void OnEnable()
     {
-        // ‰Šú‰»
+        // åˆæœŸåŒ–
         if (timerText == null)
         {
-            UnityEngine.Debug.LogError("TextMeshPro‚ÌƒeƒLƒXƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            UnityEngine.Debug.LogError("TextMeshProã®ãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
            
         }
         else
         {
             
-            UnityEngine.Debug.Log("ƒIƒuƒWƒFƒNƒg‚ªƒAƒNƒeƒBƒu‚É‚È‚è‚Ü‚µ‚½I");
+            UnityEngine.Debug.Log("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ãªã‚Šã¾ã—ãŸï¼");
         }
         
         
@@ -35,7 +35,7 @@ public class KitakuSenniNotification : MonoBehaviour
         DateTime current = currentWatch.currentTime;
         Color currentColor;
 
-        // Œo‰ßŠÔ‚ğXV
+        // çµŒéæ™‚é–“ã‚’æ›´æ–°
         elapsedTime += Time.deltaTime;
 
         if (current.Hour >= 11 && current.Hour < 13 && current.Minute >= 52.5)
@@ -43,13 +43,13 @@ public class KitakuSenniNotification : MonoBehaviour
             if (!limit)
             {
                 limit = true;
-                elapsedTime = 0f;//Œo‰ßŠÔ‚ğ‰Šú‰»
+                elapsedTime = 0f;//çµŒéæ™‚é–“ã‚’åˆæœŸåŒ–
                 currentColor = myImage.color;
 
-                // ƒAƒ‹ƒtƒ@’l‚ğ•ÏXi0.0f‚ÍŠ®‘S‚É“§–¾A1.0f‚ÍŠ®‘S‚É•s“§–¾j
-                currentColor.a = 0.5f; // ”¼“§–¾‚É‚·‚é
+                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ï¼ˆ0.0fã¯å®Œå…¨ã«é€æ˜ã€1.0fã¯å®Œå…¨ã«ä¸é€æ˜ï¼‰
+                currentColor.a = 0.5f; // åŠé€æ˜ã«ã™ã‚‹
 
-                // •ÏX‚µ‚½F‚ğImageƒRƒ“ƒ|[ƒlƒ“ƒg‚É“K—p
+                // å¤‰æ›´ã—ãŸè‰²ã‚’Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã«é©ç”¨
                 myImage.color = currentColor;
 
             }
@@ -60,13 +60,13 @@ public class KitakuSenniNotification : MonoBehaviour
             if (!limit)
             {
                 limit = true;
-                elapsedTime = 0f;//Œo‰ßŠÔ‚ğ‰Šú‰»
+                elapsedTime = 0f;//çµŒéæ™‚é–“ã‚’åˆæœŸåŒ–
                 currentColor = myImage.color;
 
-                // ƒAƒ‹ƒtƒ@’l‚ğ•ÏXi0.0f‚ÍŠ®‘S‚É“§–¾A1.0f‚ÍŠ®‘S‚É•s“§–¾j
-                currentColor.a = 0.5f; // ”¼“§–¾‚É‚·‚é
+                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ï¼ˆ0.0fã¯å®Œå…¨ã«é€æ˜ã€1.0fã¯å®Œå…¨ã«ä¸é€æ˜ï¼‰
+                currentColor.a = 0.5f; // åŠé€æ˜ã«ã™ã‚‹
 
-                // •ÏX‚µ‚½F‚ğImageƒRƒ“ƒ|[ƒlƒ“ƒg‚É“K—p
+                // å¤‰æ›´ã—ãŸè‰²ã‚’Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã«é©ç”¨
                 myImage.color = currentColor;
 
             }
@@ -76,13 +76,13 @@ public class KitakuSenniNotification : MonoBehaviour
             if (!limit)
             {
                 limit = true;
-                elapsedTime = 0f;//Œo‰ßŠÔ‚ğ‰Šú‰»
+                elapsedTime = 0f;//çµŒéæ™‚é–“ã‚’åˆæœŸåŒ–
                 currentColor = myImage.color;
 
-                // ƒAƒ‹ƒtƒ@’l‚ğ•ÏXi0.0f‚ÍŠ®‘S‚É“§–¾A1.0f‚ÍŠ®‘S‚É•s“§–¾j
-                currentColor.a = 0.5f; // ”¼“§–¾‚É‚·‚é
+                // ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’å¤‰æ›´ï¼ˆ0.0fã¯å®Œå…¨ã«é€æ˜ã€1.0fã¯å®Œå…¨ã«ä¸é€æ˜ï¼‰
+                currentColor.a = 0.5f; // åŠé€æ˜ã«ã™ã‚‹
 
-                // •ÏX‚µ‚½F‚ğImageƒRƒ“ƒ|[ƒlƒ“ƒg‚É“K—p
+                // å¤‰æ›´ã—ãŸè‰²ã‚’Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã«é©ç”¨
                 myImage.color = currentColor;
 
             }
@@ -94,7 +94,7 @@ public class KitakuSenniNotification : MonoBehaviour
 
         if (Mathf.FloorToInt(elapsedTime) % 1 == 0 && limit)
         {
-            timerText.text = "c‚è" + (15 - Mathf.FloorToInt(elapsedTime)).ToString() + "•b‚ÅŸ‚Ì‹A‘îó‹µ‚É‘JˆÚ‚µ‚Ü‚·";
+            timerText.text = "æ®‹ã‚Š" + (15 - Mathf.FloorToInt(elapsedTime)).ToString() + "ç§’ã§æ¬¡ã®å¸°å®…çŠ¶æ³ã«é·ç§»ã—ã¾ã™";
         }
 
     }

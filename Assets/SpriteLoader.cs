@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6,54 +6,54 @@ using UnityEngine.UI;
 
 public class SpriteLoader : MonoBehaviour
 {
-    private string basePath = "image"; // Šî–{ƒpƒX
-    public Image targetImage; // ƒXƒvƒ‰ƒCƒg‚ğ•\¦‚·‚éImageƒRƒ“ƒ|[ƒlƒ“ƒg
+    private string basePath = "image"; // åŸºæœ¬ãƒ‘ã‚¹
+    public Image targetImage; // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’è¡¨ç¤ºã™ã‚‹Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆ
     public GameObject kitakuScene;
 
     void Start()
     {
-        string inputString = kitakuScene.name.ToString(); // —á‚Æ‚µ‚Ä‚Ì“ü—Í•¶š—ñ
+        string inputString = kitakuScene.name.ToString(); // ä¾‹ã¨ã—ã¦ã®å…¥åŠ›æ–‡å­—åˆ—
         Sprite targetSprite = GetTargetSprite(inputString);
         if (targetSprite != null)
         {
-            Debug.Log("æ“¾‚µ‚½ƒXƒvƒ‰ƒCƒg: " + targetSprite.name);
+            Debug.Log("å–å¾—ã—ãŸã‚¹ãƒ—ãƒ©ã‚¤ãƒˆ: " + targetSprite.name);
             SetImageSprite(targetSprite);
         }
         else
         {
-            Debug.LogWarning("ƒXƒvƒ‰ƒCƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+            Debug.LogWarning("ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
         }
     }
 
     Sprite GetTargetSprite(string input)
     {
-        // “ü—Í•¶š—ñ‚©‚çÅ‘å‚Ì®”‚ğæ“¾
+        // å…¥åŠ›æ–‡å­—åˆ—ã‹ã‚‰æœ€å¤§ã®æ•´æ•°ã‚’å–å¾—
         char maxChar = input.Max();
         int maxInt = int.Parse(maxChar.ToString());
 
-        // '1'‚Ì”‚ğ”‚¦‚é
+        // '1'ã®æ•°ã‚’æ•°ãˆã‚‹
         int countOfOnes = input.Count(c => c == '1');
 
-        // ƒpƒX‚ğ\’z
+        // ãƒ‘ã‚¹ã‚’æ§‹ç¯‰
         string path = $"{basePath}/{maxInt}/{countOfOnes}";
         Debug.Log("Loading sprites from path: " + path);
 
-        // ƒtƒHƒ‹ƒ_[“à‚Ì‚·‚×‚Ä‚ÌƒXƒvƒ‰ƒCƒg‚ğƒ[ƒh
+        // ãƒ•ã‚©ãƒ«ãƒ€ãƒ¼å†…ã®ã™ã¹ã¦ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’ãƒ­ãƒ¼ãƒ‰
         Sprite[] sprites = Resources.LoadAll<Sprite>(path);
 
         if (sprites.Length == 0)
         {
-            Debug.LogWarning("w’è‚³‚ê‚½ƒpƒX‚ÉƒXƒvƒ‰ƒCƒg‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½: " + path);
+            Debug.LogWarning("æŒ‡å®šã•ã‚ŒãŸãƒ‘ã‚¹ã«ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸ: " + path);
             return null;
         }
 
-        // ƒXƒvƒ‰ƒCƒg–¼‚Ì––”ö‚Ì®”•”•ª‚Åƒ\[ƒg
+        // ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆåã®æœ«å°¾ã®æ•´æ•°éƒ¨åˆ†ã§ã‚½ãƒ¼ãƒˆ
         List<Sprite> sortedSprites = sprites.OrderBy(sprite => ExtractNumber(sprite.name)).ToList();
 
-        // ”CˆÓ‚Ì®”‚Ì”‚ğ”‚¦‚é
+        // ä»»æ„ã®æ•´æ•°ã®æ•°ã‚’æ•°ãˆã‚‹ã£d
         int countOfMaxInt = input.Count(c => c == maxChar);
 
-        // (countOfMaxInt - 1)”Ô–Ú‚ÌƒXƒvƒ‰ƒCƒg‚ğæ“¾
+        // (countOfMaxInt - 1)ç•ªç›®ã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã‚’å–å¾—
         int targetIndex = countOfMaxInt - 1;
         if (targetIndex >= 0 && targetIndex < sortedSprites.Count)
         {
@@ -61,15 +61,15 @@ public class SpriteLoader : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("w’è‚³‚ê‚½ƒCƒ“ƒfƒbƒNƒX‚ÉƒXƒvƒ‰ƒCƒg‚ª‘¶İ‚µ‚Ü‚¹‚ñ: " + targetIndex);
-            Debug.LogWarning("ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚ğI—¹‚³‚¹‚Ü‚·");
+            Debug.LogWarning("æŒ‡å®šã•ã‚ŒãŸã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹ã«ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãŒå­˜åœ¨ã—ã¾ã›ã‚“: " + targetIndex);
+            Debug.LogWarning("ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã•ã›ã¾ã™");
             return Resources.LoadAll<Sprite>("Image/SimulationEndSprites")[0];
         }
     }
 
     int ExtractNumber(string name)
     {
-        // –¼‘O‚Ì––”ö‚Ì®”•”•ª‚ğ’Šo
+        // åå‰ã®æœ«å°¾ã®æ•´æ•°éƒ¨åˆ†ã‚’æŠ½å‡º
         Match match = Regex.Match(name, @"\d+$");
         return match.Success ? int.Parse(match.Value) : 0;
     }
@@ -80,7 +80,7 @@ public class SpriteLoader : MonoBehaviour
         {
             targetImage.sprite = sprite;
 
-            // RectTransform‚Ìİ’è
+            // RectTransformã®è¨­å®š
             RectTransform rt = targetImage.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0, 0);
             rt.anchorMax = new Vector2(1, 1);
@@ -89,7 +89,7 @@ public class SpriteLoader : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("targetImage‚ªİ’è‚³‚ê‚Ä‚¢‚Ü‚¹‚ñB");
+            Debug.LogWarning("targetImageãŒè¨­å®šã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚");
         }
     }
 }

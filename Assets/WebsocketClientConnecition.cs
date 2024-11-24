@@ -23,6 +23,8 @@ public class WebsocketClientConnecition : MonoBehaviour
     void Start()
     {
         // 初期化コードが必要であればここに追加
+        
+
     }
 
     void Update()
@@ -80,7 +82,8 @@ public class WebsocketClientConnecition : MonoBehaviour
 
         ws.OnClose += (sender, e) =>
         {
-            Debug.Log("Connection closed!");
+            
+            Debug.Log($"Connection closed! Reason: {e.Reason}, Code: {e.Code}");
            Reconnect(ServerIp, Port);
         };
 

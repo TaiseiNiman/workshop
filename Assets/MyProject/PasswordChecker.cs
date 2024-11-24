@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using TMPro;
@@ -6,52 +6,52 @@ using MyProject;
 
 public class PasswordChecker : MonoBehaviour
 {
-    public TMP_InputField inputField; // ƒeƒLƒXƒgƒtƒB[ƒ‹ƒh
-    public string correctPassword; // —\‚ß—^‚¦‚Ä‚¨‚¢‚½ƒpƒXƒ[ƒh
+    public TMP_InputField inputField; // ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰
+    public string correctPassword; // äºˆã‚ä¸ãˆã¦ãŠã„ãŸãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰
     public GameObject KitakuSceneObject;
     public GameObject PasswordObject;
     [SerializeField]
-    public UnityEvent correctM;//ƒpƒXƒ[ƒh“ü—Í¬Œ÷‚ÉÀs‚·‚éƒƒ\ƒbƒh‚ğ’Ç‰Á
+    public UnityEvent correctM;//ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰å…¥åŠ›æˆåŠŸæ™‚ã«å®Ÿè¡Œã™ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
 
     void Start()
     {
-        //ƒpƒXƒ[ƒh‚ğiniƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚Ş
+        //ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’iniãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿è¾¼ã‚€
         IniReader iniReader = new IniReader();
         iniReader.LoadIniFile("workshopSimulationPassword");
         switch ((int) char.GetNumericValue(PasswordObject.name[PasswordObject.name.Length-1]))
         {
             case 1:
-                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length+10).ToString(), "‰ïĞ");
+                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length+10).ToString(), "ä¼šç¤¾");
                 break;
             case 2:
                 correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "JR");
                 break;
             case 3:
-                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "’n‰º“S+‚ä‚Æ‚è[‚Æƒ‰ƒCƒ“+“k•à");
+                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "åœ°ä¸‹é‰„+ã‚†ã¨ã‚Šãƒ¼ã¨ãƒ©ã‚¤ãƒ³+å¾’æ­©");
                 break;
             case 4:
-                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "–¼“S+ƒ^ƒNƒV[");
+                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "åé‰„+ã‚¿ã‚¯ã‚·ãƒ¼");
                 break;
             case 5:
-                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "’n‰º“S+ƒ^ƒNƒV[");
+                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "åœ°ä¸‹é‰„+ã‚¿ã‚¯ã‚·ãƒ¼");
                 break;
             case 6:
-                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "Ğ—pÔ");
+                correctPassword = iniReader.GetIniValue((KitakuSceneObject.name.Length + 10).ToString(), "ç¤¾ç”¨è»Š");
                 break;
             default:
-                Debug.Log("ƒpƒXƒ[ƒhİ’èƒIƒuƒWƒFƒNƒg‚Ì–¼‘O‚ª•s³‚Å‚·.");
+                Debug.Log("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰è¨­å®šã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®åå‰ãŒä¸æ­£ã§ã™.");
                 break;
 
         }
         
         Debug.Log($"correctPassword: {correctPassword}");
-        // ƒeƒLƒXƒgƒtƒB[ƒ‹ƒh‚ÉƒŠƒXƒi[‚ğ’Ç‰Á
+        // ãƒ†ã‚­ã‚¹ãƒˆãƒ•ã‚£ãƒ¼ãƒ«ãƒ‰ã«ãƒªã‚¹ãƒŠãƒ¼ã‚’è¿½åŠ 
         inputField.onValueChanged.AddListener(CheckPassword);
     }
 
     void CheckPassword(string input)
     {
-        // “ü—Í‚³‚ê‚½ƒeƒLƒXƒg‚ªƒpƒXƒ[ƒh‚Æˆê’v‚·‚é‚©Šm”F
+        // å…¥åŠ›ã•ã‚ŒãŸãƒ†ã‚­ã‚¹ãƒˆãŒãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã¨ä¸€è‡´ã™ã‚‹ã‹ç¢ºèª
         if (input == correctPassword)
         {
             ExecuteMethod();
@@ -60,9 +60,9 @@ public class PasswordChecker : MonoBehaviour
 
     void ExecuteMethod()
     {
-        // ”CˆÓ‚Ìƒƒ\ƒbƒh‚ğÀs
-        Debug.Log("ƒpƒXƒ[ƒh‚ªˆê’v‚µ‚Ü‚µ‚½I");
-        // ‚±‚±‚ÉÀs‚µ‚½‚¢ˆ—‚ğ‹Lq
+        // ä»»æ„ã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å®Ÿè¡Œ
+        Debug.Log("ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ãŒä¸€è‡´ã—ã¾ã—ãŸï¼");
+        // ã“ã“ã«å®Ÿè¡Œã—ãŸã„å‡¦ç†ã‚’è¨˜è¿°
         correctM?.Invoke();
         
     }

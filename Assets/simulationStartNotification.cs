@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -13,11 +13,11 @@ public class simulationStartNotification : MonoBehaviour
 
     public void notification(string text) {
 
-        string pattern = @"^c‚è\d+•b‚ÅƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚ğŠJn‚µ‚Ü‚·\.$";
+        string pattern = @"^æ®‹ã‚Š\d+ç§’ã§ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’é–‹å§‹ã—ã¾ã™\.$";
         Regex regex = new Regex(pattern);
 
         if (regex.IsMatch(text)) {
-            title.text = string.Empty;//ƒ^ƒCƒgƒ‹‚ğ‹ó•¶š—ñ‚É‚·‚é.
+            title.text = string.Empty;//ï¿½^ï¿½Cï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ó•¶ï¿½ï¿½ï¿½É‚ï¿½ï¿½ï¿½.
             tt.text = text;
         }
 
@@ -27,7 +27,7 @@ public class simulationStartNotification : MonoBehaviour
     {
 
         if (text == "WorkshopSimulationStart") {
-            simulation.Invoke(1);//ƒVƒ…ƒ~ƒŒ[ƒVƒ‡ƒ“‚ğŠJn‚·‚é.
+            simulation.Invoke(1);//ï¿½Vï¿½ï¿½ï¿½~ï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Jï¿½nï¿½ï¿½ï¿½ï¿½.
             gameObject.SetActive(false);
         }
 

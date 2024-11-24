@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -28,7 +28,7 @@ public class DateTimeSync : MonoBehaviour
         if (success)
         {
             Debug.Log("Converted DateTime: " + dateTime);
-            timerText.text = $"Œ»İ‚Ì: {dateTime:HHmm•ª}";
+            timerText.text = $"ç¾åœ¨ã®æ™‚åˆ»: {dateTime:HHæ™‚mmåˆ†}";
             currentTime = dateTime;
         }
         else

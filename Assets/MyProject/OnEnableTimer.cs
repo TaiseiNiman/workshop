@@ -1,10 +1,10 @@
-using System;
+ï»¿using System;
 using UnityEngine;
 using TMPro;
 
 public class ExampleScript : MonoBehaviour
 {
-    public TMP_Text timerText; // TextMeshPro‚ÌƒeƒLƒXƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚ğƒAƒ^ƒbƒ`
+    public TMP_Text timerText; // TextMeshProã®ãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã‚’ã‚¢ã‚¿ãƒƒãƒ
     public GameObject SceneObject;
     private DateTimeSync currentWatch;
 
@@ -17,13 +17,13 @@ public class ExampleScript : MonoBehaviour
 
     void Start()
     {
-        // ‰Šú‰»
+        // åˆæœŸåŒ–
         if (timerText == null)
         {
-            UnityEngine.Debug.LogError("TextMeshPro‚ÌƒeƒLƒXƒgƒRƒ“ƒ|[ƒlƒ“ƒg‚ªƒAƒ^ƒbƒ`‚³‚ê‚Ä‚¢‚Ü‚¹‚ñI");
+            UnityEngine.Debug.LogError("TextMeshProã®ãƒ†ã‚­ã‚¹ãƒˆã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆãŒã‚¢ã‚¿ãƒƒãƒã•ã‚Œã¦ã„ã¾ã›ã‚“ï¼");
             
         }
-        UnityEngine.Debug.Log("ƒIƒuƒWƒFƒNƒg‚ªƒAƒNƒeƒBƒu‚É‚È‚è‚Ü‚µ‚½I");
+        UnityEngine.Debug.Log("ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ãªã‚Šã¾ã—ãŸï¼");
     }
 
     void Update()
@@ -31,29 +31,29 @@ public class ExampleScript : MonoBehaviour
         currentWatch = GameObject.Find("SimulationWatch").GetComponent<DateTimeSync>();
         DateTime current = currentWatch.currentTime;
         bool limit = false;
-        // Œo‰ßŠÔ‚ğXV
+        // çµŒéæ™‚é–“ã‚’æ›´æ–°
         elapsedTime += Time.deltaTime;
 
         if (current.Hour >= 11 && current.Hour < 13 && current.Minute > 37.5)
         {
-            limit = true; // 1ŠÔ‚ªÀŠÔ2•ª‚Åi‚Ş
+            limit = true; // 1æ™‚é–“ãŒå®Ÿæ™‚é–“2åˆ†ã§é€²ã‚€
         }
         else if (current.Hour >= 13 && current.Hour < 18 && current.Minute > 35)
         {
-            limit = true; // 1ŠÔ‚ªÀŠÔ1.5•ª‚Åi‚Ş
+            limit = true; // 1æ™‚é–“ãŒå®Ÿæ™‚é–“1.5åˆ†ã§é€²ã‚€
         }
         else if (current.Hour >= 18 && current.Hour < 24 && current.Minute > 30)
         {
-            limit = true; // 1ŠÔ‚ªÀŠÔ1•ª‚Åi‚Ş
+            limit = true; // 1æ™‚é–“ãŒå®Ÿæ™‚é–“1åˆ†ã§é€²ã‚€
         }
         else
         {
-            elapsedTime = 0f;//‚ğ‰Šú‰»
+            elapsedTime = 0f;//æ™‚åˆ»ã‚’åˆæœŸåŒ–
         }
 
         if (Mathf.FloorToInt(elapsedTime) % 1 == 0 && limit)
         {
-            timerText.text = "c‚è" + (14 - Mathf.FloorToInt(elapsedTime)).ToString() + "•b‚Å‚·@@Ÿ‚Éi‚ñ‚Å‰º‚³‚¢.";
+            timerText.text = "æ®‹ã‚Š" + (14 - Mathf.FloorToInt(elapsedTime)).ToString() + "ç§’ã§ã™ã€€ã€€æ¬¡ã«é€²ã‚“ã§ä¸‹ã•ã„.";
         }
 
     }
