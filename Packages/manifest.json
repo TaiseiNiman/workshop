@@ -2,6 +2,7 @@
   "dependencies": {
     "com.community.netcode.extensions": "https://github.com/Unity-Technologies/multiplayer-community-contributions.git?path=/com.community.netcode.extensions",
     "com.unity.collab-proxy": "2.1.0",
+    "com.unity.device-simulator.devices": "1.0.0",
     "com.unity.feature.development": "1.0.1",
     "com.unity.multiplayer.tools": "1.1.1",
     "com.unity.netcode.gameobjects": "1.6.0",

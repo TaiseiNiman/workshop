@@ -47,6 +47,12 @@ public class PasswordChecker : MonoBehaviour
         Debug.Log($"correctPassword: {correctPassword}");
         // テキストフィールドにリスナーを追加
         inputField.onValueChanged.AddListener(CheckPassword);
+        //パスワードがないか確認
+        CheckPassword(string.Empty);//パスワードが設定されてない時のため
+    }
+
+    void Update(){
+        
     }
 
     void CheckPassword(string input)
