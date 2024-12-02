@@ -13,7 +13,7 @@ public class PasswordChecker : MonoBehaviour
     [SerializeField]
     public UnityEvent correctM;//パスワード入力成功時に実行するメソッドを追加
 
-    void Start()
+    void OnEnable()
     {
         //パスワードをiniファイルから読み込む
         IniReader iniReader = new IniReader();

@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
@@ -7,6 +7,8 @@ public class KitakuSenniInitialize : MonoBehaviour
 {
     public string userName;
     public GameObject ActiveScreenObject;
+    public KitakuSenniManager parent;
+    public OnButtonWithErrorMessage child;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,7 @@ public class KitakuSenniInitialize : MonoBehaviour
     }
     public void initialize(string id, string user, bool isResult,GameObject obj)
     {
-        //‰Šú‰»
+        //åˆæœŸåŒ–
         userName = user;
         gameObject.name = id;
         ActiveScreenObject = obj;
@@ -29,13 +31,13 @@ public class KitakuSenniInitialize : MonoBehaviour
     {
         List<GameObject> taggedChildren = new List<GameObject>();
 
-        // q—v‘f‚ğ‚·‚×‚Äæ“¾
+        // å­è¦ç´ ã‚’ã™ã¹ã¦å–å¾—
         foreach (Transform child in transform)
         {
-            // q—v‘f‚Ìƒ^ƒO‚ğƒ`ƒFƒbƒN
+            // å­è¦ç´ ã®ã‚¿ã‚°ã‚’ãƒã‚§ãƒƒã‚¯
             if (child.CompareTag(tag))
             {
-                // ƒ^ƒO‚ªˆê’v‚·‚éq—v‘f‚ğƒŠƒXƒg‚É’Ç‰Á
+                // ã‚¿ã‚°ãŒä¸€è‡´ã™ã‚‹å­è¦ç´ ã‚’ãƒªã‚¹ãƒˆã«è¿½åŠ 
                 taggedChildren.Add(child.gameObject);
             }
         }

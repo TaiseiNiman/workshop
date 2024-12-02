@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
@@ -11,9 +11,10 @@ using System.Collections;
 public class WebsocketClientConnecition : MonoBehaviour
 {
     private WebSocket ws;
-    public string path; // path–¼‚ğw’è‚·‚é
+    public string path; // pathåã‚’æŒ‡å®šã™ã‚‹
     private bool isConnecting = false;
-    private float reconnectDelay = 5.0f; // ÄÚ‘±‚ÌŠÔŠui•bj
+    private float reconnectDelay = 5.0f; // å†æ¥ç¶šã®é–“éš”ï¼ˆç§’ï¼‰
+    private Queue<string> sendQueue;
 
     [SerializeField]
     public UnityEvent<string> onMessage1;
@@ -22,39 +23,64 @@ public class WebsocketClientConnecition : MonoBehaviour
 
     void Start()
     {
-        // ‰Šú‰»ƒR[ƒh‚ª•K—v‚Å‚ ‚ê‚Î‚±‚±‚É’Ç‰Á
+        // åˆæœŸåŒ–ã‚³ãƒ¼ãƒ‰ãŒå¿…è¦ã§ã‚ã‚Œã°ã“ã“ã«è¿½åŠ 
         
-
-    }
+        sendQueue = new Queue<string>();
+}
 
     void Update()
     {
-        // ƒƒCƒ“ƒXƒŒƒbƒh‚ÅƒƒbƒZ[ƒW‚ğˆ—
+        object obj = new object();//lockã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ
+        if(ws != null)
+        {
+            if(ws.ReadyState == WebSocketState.Open)
+            {
+                if(sendQueue.Count > 0)
+                {
+                    lock (obj)
+                    {
+                        string message = sendQueue.Peek();
+                        try
+                        {
+                            ws.Send(message);
+                            sendQueue.Dequeue();
+                        }
+                        catch(Exception ex)
+                        {
+                            Debug.LogError($"{message} is not sended,exception: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                ws.ConnectAsync();//å†æ¥ç¶š
+            }
+        }
+
+        // ãƒ¡ã‚¤ãƒ³ã‚¹ãƒ¬ãƒƒãƒ‰ã§ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’å‡¦ç†
         while (messageQueue.Count > 0)
         {
             string message;
             lock (messageQueue)
             {
                 message = messageQueue.Dequeue();
-            }
-            Debug.Log("Dequeued message: " + message);
+                onMessage1?.Invoke(message);
+                Debug.Log("Dequeued message: " + message);
+            }            
 
-            if (path == "Timer") {
-                GameObject.Find("SimulationWatch").GetComponent<DateTimeSync>().GetTimer(message);
-            }
-            else if(path == "Notification")
-            {
-                GameObject.Find("SimulationStartScreen").GetComponent<simulationStartNotification>().notification(message);
-                GameObject.Find("SimulationStartScreen").GetComponent<simulationStartNotification>().StartNotification(message);
-            }
-            
-            
         }
     }
 
     public void ReceiveBroadcast(string ServerIp, string Port)
     {
         Debug.Log($"Connecting to WebSocket server at {ServerIp}:{Port}");
+
+        if (ws != null)
+        {
+            ws.Close();
+            ws = null;
+        }
 
         ws = new WebSocket($"ws://{ServerIp}:{Port}/{path}");
 
@@ -69,7 +95,7 @@ public class WebsocketClientConnecition : MonoBehaviour
             lock (messageQueue)
             {
                 Debug.Log("Received message: " + e.Data);
-                messageQueue.Enqueue(e.Data);
+              messageQueue.Enqueue(e.Data);
             }
         };
 
@@ -77,34 +103,37 @@ public class WebsocketClientConnecition : MonoBehaviour
         {
             Debug.LogError("Error: " + e.Message);
             Debug.LogError($"WebSocket Error: {e.Message}, Exception: {e.Exception}");
-            Reconnect(ServerIp, Port);
+            //StartCoroutine(Reconnect(ServerIp, Port));
         };
 
         ws.OnClose += (sender, e) =>
         {
             
             Debug.Log($"Connection closed! Reason: {e.Reason}, Code: {e.Code}");
-           Reconnect(ServerIp, Port);
+            //StartCoroutine(Reconnect(ServerIp, Port));
         };
 
         ws.ConnectAsync();
         Debug.Log("Enter a message to send to the server:");
-        string messageToSend = "Hello, server!"; // ‚±‚±‚Í“K‹X•ÏX
-        if (isConnecting) ws.Send(messageToSend);
+        //string messageToSend = "Hello, server!"; // ã“ã“ã¯é©å®œå¤‰æ›´
+        //if (isConnecting) ws.Send(messageToSend);
     }
 
     IEnumerator Reconnect(string ip, string port)
     {
         if (isConnecting) yield break;
 
+        Debug.Log("Attempting to reconnect...");
         isConnecting = true;
         yield return new WaitForSeconds(reconnectDelay);
         ReceiveBroadcast(ip, port);
+        isConnecting = false;
+        Debug.Log("Reconnection attempt finished.");
     }
 
     public void SendText(string message)
     {
-        if (isConnecting) ws.Send(message); // ƒƒbƒZ[ƒW‚ğ‘—‚é
+        sendQueue.Enqueue(message); // ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’ã‚­ãƒ¥ãƒ¼ã«è¿½åŠ 
     }
 
     void OnDestroy()

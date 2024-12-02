@@ -10,6 +10,8 @@ public class simulationStartNotification : MonoBehaviour
     public TMP_Text title;
     [SerializeField]
     public UnityEvent<int> simulation;
+    [SerializeField]
+    public UnityEvent simulation2;
 
     public void notification(string text) {
 
@@ -28,6 +30,7 @@ public class simulationStartNotification : MonoBehaviour
 
         if (text == "WorkshopSimulationStart") {
             simulation.Invoke(1);//�V���~���[�V�������J�n����.
+            simulation2?.Invoke();
             gameObject.SetActive(false);
         }
 

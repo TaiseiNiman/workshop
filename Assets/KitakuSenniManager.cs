@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -6,119 +6,186 @@ using System;
 
 public class KitakuSenniManager : MonoBehaviour
 {
-    // ƒvƒŒƒnƒu‚ğQÆ‚·‚é‚½‚ß‚Ì•Ï”
-    public GameObject selectorPrefab;//‹A‘î‚ğ‘I‘ğ‚·‚é‰æ–Ê
-    public GameObject selectorResultPrefab;//‘I‘ğŒ‹‰Ê‚Ì‰æ–Ê
-    public GameObject ImagePrefab;//‹A‘îó‹µ‰æ‘œ‚Ì•\¦‰æ–Ê
-    //ƒvƒŒƒnƒu‚Ì‰Šú‰»ƒƒ\ƒbƒh‚ğ’Ç‰Á
+    // ãƒ—ãƒ¬ãƒãƒ–ã‚’å‚ç…§ã™ã‚‹ãŸã‚ã®å¤‰æ•°
+    public GameObject selectorPrefab;//å¸°å®…ã‚’é¸æŠã™ã‚‹ç”»é¢
+    public GameObject selectorResultPrefab;//é¸æŠçµæœã®ç”»é¢
+    public GameObject ImagePrefab;//å¸°å®…çŠ¶æ³ç”»åƒã®è¡¨ç¤ºç”»é¢
+    //ãƒ—ãƒ¬ãƒãƒ–ã®åˆæœŸåŒ–ãƒ¡ã‚½ãƒƒãƒ‰ã‚’è¿½åŠ 
     [SerializeField]
     public UnityEvent<string,string,bool,GameObject> initiailze;
-    //ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“©“®I—¹‚ÉÀs‚³‚ê‚éƒCƒxƒ“ƒgƒƒ\ƒbƒh‚ğw’è
+    //ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³è‡ªå‹•çµ‚äº†æ™‚ã«å®Ÿè¡Œã•ã‚Œã‚‹ã‚¤ãƒ™ãƒ³ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ã‚’æŒ‡å®š
     [SerializeField]
     public UnityEvent simulationOnClose;
-    //ƒvƒŒƒnƒu‰Šú‰»•Ï”
+    //ãƒ—ãƒ¬ãƒãƒ–åˆæœŸåŒ–å¤‰æ•°
     public string userName;
     public string KitakuStateId;
     public bool IsResult = true;
-    //ŠÔ‚ğæ“¾
+    private string _userId;
+    public string userId { get { return _userId; } set { _userId = value; } }
+    //æ™‚é–“ã‚’å–å¾—
     public DateTimeSync current;
 
+    public KitakuSenniInitialize child;
+
+    public WebsocketClientConnecition simulation;
+
+    private float updateErapsed;
     //
 
-    //ƒvƒ‰ƒCƒx[ƒg
+    //ãƒ—ãƒ©ã‚¤ãƒ™ãƒ¼ãƒˆ
     private GameObject activePrefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        updateErapsed = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        updateErapsed += Time.deltaTime;
         int num;
         int hour;
         int day;
-        //©“®‘JˆÚ‚ğÀ‘•‚·‚é
-        if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+        string status = "";
+        if (child != null)
         {
-            hour = (KitakuStateId.Length + 11) % 24;
-            day = (KitakuStateId.Length + 11) / 24;
-            //¡AƒŠƒUƒ‹ƒg‰æ–Ê‚ğ•\¦‚µ‚Ä‚¢‚Ü‚·
-            //12,13...‚Æ‚È‚Á‚½‚ç©“®‚Å‘JˆÚ
-            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
+            if (child.child != null)
             {
-                KitakuSenniUpdate(1);//©“®XV
-            }
-            
-        }
-        else if (!ContainsOtherThanOne(KitakuStateId))
-        {
-            hour = (KitakuStateId.Length + 10) % 24;
-            day = (KitakuStateId.Length + 10) / 24;
-            //¡A‹A‘î‘I‘ğ‰æ–Ê‚ğ•\¦‚µ‚Ä‚¢‚Ü‚·
-            //1145•ª,1245•ª,...‚Æ‚È‚Á‚½‚ç©“®‚Å‘JˆÚ
-            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 45, 0))
-            {
-                KitakuSenniUpdate(0);//©“®XV 0‚Í‹ó•¶š—ñ‚ğˆÓ–¡‚·‚é
-            }
-            
-        }
-        else
-        {
-            hour = (KitakuStateId.Length + 10) % 24;
-            day = (KitakuStateId.Length + 10) / 24;
-            //¡A‹A‘îó‹µ‚Ì‰æ‘œ‚ğ•\¦‚µ‚Ä‚¢‚Ü‚·
-            //11,12,...‚Æ‚È‚Á‚½‚ç©“®‚Å‘JˆÚ
-            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
-            {
-                if (!string.IsNullOrEmpty(KitakuStateId))
+                if (child.child.MoveSceneNumber != null)
                 {
-                    num = (int)char.GetNumericValue(KitakuStateId[KitakuStateId.Length - 1]);
-                    Debug.Log($"Character '{KitakuStateId[KitakuStateId.Length - 1]}' converted to int: {num}");
-                    KitakuSenniUpdate(num);
+                    //ãƒ¦ãƒ¼ã‚¶ãƒ¼ãŒé¸ã‚“ã å¸°å®…é¸æŠçŠ¶æ³ã§æ›´æ–°
+                    status = child.child.MoveSceneNumber;
+
+                }
+                else if (child.child.TestMoveSceneNumber != null)
+                {
+                    //ãƒ«ãƒ¼ãƒ«ä¸Šé¸æŠã§ãã‚‹å¸°å®…é·ç§»çŠ¶æ³ã®ã†ã¡ã®ã©ã‚Œã‹ä¸€ã¤ã§æ›´æ–°
+                    status = child.child.TestMoveSceneNumber;
                 }
                 else
                 {
+                    //
                     
-                    throw new System.ArgumentException("The string cannot be null or empty.");
+                }
+            }
+        }
+
+            //è‡ªå‹•é·ç§»ã‚’å®Ÿè£…ã™ã‚‹
+            if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+            {
+                hour = (KitakuStateId.Length + 11) % 24;
+                day = (KitakuStateId.Length + 11) / 24;
+                //ä»Šã€ãƒªã‚¶ãƒ«ãƒˆç”»é¢ã‚’è¡¨ç¤ºã—ã¦ã„ã¾ã™
+                //12æ™‚,13æ™‚...ã¨ãªã£ãŸã‚‰è‡ªå‹•ã§é·ç§»
+                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
+                {
+                    KitakuSenniUpdate(1);//è‡ªå‹•æ›´æ–°
                 }
 
             }
-            
-        }
-        //25‚Å©“®“I‚ÉƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚ğI—¹‚³‚¹‚é
-        if(current.currentTime > new DateTime(1997, 7, 2, 1, 0, 0))
-        {
-            //ƒVƒ~ƒ…ƒŒ[ƒVƒ‡ƒ“‚ğI—¹‚³‚¹‚é‚Ì‚Å‹A‘îó‹µ‚ğ”jŠü‚·‚é
-            foreach (Transform child in transform)
-
+            else if (!ContainsOtherThanOne(KitakuStateId))
             {
-                //q—v‘f‚ğ”jŠü
-                Destroy(child.gameObject);
+                hour = (KitakuStateId.Length + 10) % 24;
+                day = (KitakuStateId.Length + 10) / 24;
+                //ä»Šã€å¸°å®…é¸æŠç”»é¢ã‚’è¡¨ç¤ºã—ã¦ã„ã¾ã™
+                //11æ™‚45åˆ†,12æ™‚45åˆ†,...ã¨ãªã£ãŸã‚‰è‡ªå‹•ã§é·ç§»
+                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 45, 0))
+                {
+                
+                if(updateErapsed >= 1.0f)
+                {
+                    simulation.onMessage1.AddListener(callbackStatusUpdate);
+                    simulation.SendText($"ACTION:{userId}:{KitakuStateId + status}");//ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸ã‚’é€ä¿¡ã™ã‚‹
+                    updateErapsed = 0;
+                }
+                //åŒæœŸå‡¦ç†
+                
+                }
 
             }
-            //ƒVƒ…ƒ~ƒŒ[ƒVƒ‡ƒ“ƒNƒ[ƒYƒCƒxƒ“ƒgƒŠƒXƒi[‚ÌÀs
-            simulationOnClose?.Invoke();
-        } 
+            else
+            {
+                hour = (KitakuStateId.Length + 10) % 24;
+                day = (KitakuStateId.Length + 10) / 24;
+                //ä»Šã€å¸°å®…çŠ¶æ³ã®ç”»åƒã‚’è¡¨ç¤ºã—ã¦ã„ã¾ã™
+                //11æ™‚,12æ™‚,...ã¨ãªã£ãŸã‚‰è‡ªå‹•ã§é·ç§»
+                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
+                {
+                    if (!string.IsNullOrEmpty(KitakuStateId))
+                    {
+                        num = (int)char.GetNumericValue(KitakuStateId[KitakuStateId.Length - 1]);
+                        Debug.Log($"Character '{KitakuStateId[KitakuStateId.Length - 1]}' converted to int: {num}");
+                        KitakuSenniUpdate(num);
+                    }
+                    else
+                    {
+
+                        throw new System.ArgumentException("The string cannot be null or empty.");
+                    }
+
+                }
+
+            }
+
+        //24æ™‚ã§ä¼šç¤¾å†…ã«æ®‹ã‚‹ã‚’é¸æŠã—ãŸäººã¯è‡ªå‹•ã§ç”»åƒã‚’è¡¨ç¤º
+        if (current.currentTime > new DateTime(1997, 7, 2, 0, 0, 0) && !ContainsOtherThanOne(KitakuStateId) && !IsResult)
+        {
+            KitakuSenniUpdate(0);
+        }
+        //25æ™‚ã§è‡ªå‹•çš„ã«ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã•ã›ã‚‹
+        if (current.currentTime > new DateTime(1997, 7, 2, 1, 0, 0))
+            {
+                //ã‚·ãƒŸãƒ¥ãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚’çµ‚äº†ã•ã›ã‚‹ã®ã§å¸°å®…çŠ¶æ³ã‚’ç ´æ£„ã™ã‚‹
+                foreach (Transform child in transform)
+
+                {
+                    //å­è¦ç´ ã‚’ç ´æ£„
+                    Destroy(child.gameObject);
+
+                }
+                //ã‚·ãƒ¥ãƒŸãƒ¬ãƒ¼ã‚·ãƒ§ãƒ³ã‚¯ãƒ­ãƒ¼ã‚ºã‚¤ãƒ™ãƒ³ãƒˆãƒªã‚¹ãƒŠãƒ¼ã®å®Ÿè¡Œ
+                simulationOnClose?.Invoke();
+            }
+        
 
         
     }
-    //‹A‘î‘JˆÚó‹µ‚ğ•\¦‚·‚éƒQ[ƒ€ƒIƒuƒWƒFƒNƒg‚ğXV‚·‚é
+
+    private void callbackStatusUpdate(string messages)//æ›¸ãè¾¼ã¿å¾Œãã®ã¾ã¾åæ˜ ã•ã›ã‚‹ãƒ¡ã‚½ãƒƒãƒ‰
+    {
+        //è‡ªå‹•é·ç§»ã®å‡¦ç†ã‚’è¡Œã†
+        string result = messages.Split(':')[0];
+        string before = messages.Split(':')[2];
+        string update = messages.Split(':')[3];
+        if (before == userId)//idä¸€è‡´ã®ã¿
+        {
+            if ("your selected simulation status was updated" == result)//æ›¸ãè¾¼ã¿æˆåŠŸæ™‚ã®ã¿
+            {
+                //ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯é–¢æ•°ã‚’å‰Šé™¤
+                simulation.onMessage1.RemoveListener(callbackStatusUpdate);
+                //å¸°å®…çŠ¶æ³ã‚’é·ç§»
+                if (update[update.Length - 1].ToString() == "1") KitakuSenniUpdate(0);//è‡ªå‹•æ›´æ–° 0ã¯ç©ºæ–‡å­—åˆ—ã‚’æ„å‘³ã™ã‚‹
+                else KitakuSenniUpdate(update[update.Length - 1].ToString());
+            }
+        }
+    }
+
+    //å¸°å®…é·ç§»çŠ¶æ³ã‚’è¡¨ç¤ºã™ã‚‹ã‚²ãƒ¼ãƒ ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã™ã‚‹
     public void KitakuSenniUpdate(int SelectNumber)
     {
-        //ƒWƒFƒlƒŠƒbƒNT‚ÌŒ^‚ªint‚©string‚©‚É‚æ‚Á‚Äˆ—‚ğ•ª‚¯‚é.
+        //ã‚¸ã‚§ãƒãƒªãƒƒã‚¯Tã®å‹ãŒintã‹stringã‹ã«ã‚ˆã£ã¦å‡¦ç†ã‚’åˆ†ã‘ã‚‹.
         
 
-        //‹A‘î‘JˆÚó‹µ‚ğXV
+        //å¸°å®…é·ç§»çŠ¶æ³ã‚’æ›´æ–°
         KitakuStateId += SelectNumber == 0 ? string.Empty : SelectNumber.ToString();
         IsResult = !IsResult;
-        //ƒvƒŒƒnƒu‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ”jŠü
+        //ãƒ—ãƒ¬ãƒãƒ–ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç ´æ£„
         foreach (Transform child in transform)
 
         { 
-           //q—v‘f‚ğ”jŠü
+           //å­è¦ç´ ã‚’ç ´æ£„
            Destroy(child.gameObject);
             
         }
@@ -135,10 +202,10 @@ public class KitakuSenniManager : MonoBehaviour
             activePrefab = ImagePrefab;
         }
 
-        //ƒvƒŒƒnƒu‚ğ‰Šú‰»‚µƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‰Šú‰»‚µ‚Ä‚¢‚é‚æ‚¤‚ÉŒ©‚¹‚©‚¯‚é
+        //ãƒ—ãƒ¬ãƒãƒ–ã‚’åˆæœŸåŒ–ã—ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã—ã¦ã„ã‚‹ã‚ˆã†ã«è¦‹ã›ã‹ã‘ã‚‹
         initiailze?.Invoke(KitakuStateId,userName,IsResult,gameObject);
 
-        // ƒvƒŒƒnƒu‚ğƒCƒ“ƒXƒ^ƒ“ƒX‰»
+        // ãƒ—ãƒ¬ãƒãƒ–ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–
         GameObject instance = Instantiate(activePrefab, gameObject.transform);
         RectTransform rectTransform = instance.GetComponent<RectTransform>();
 
@@ -155,12 +222,13 @@ public class KitakuSenniManager : MonoBehaviour
         }
 
 
-        KitakuSenniInitialize test = instance.GetComponent<KitakuSenniInitialize>();
-        test.userName = userName;
-        test.gameObject.name = KitakuStateId;
-        test.ActiveScreenObject = gameObject;
+        child = instance.GetComponent<KitakuSenniInitialize>();
+        child.userName = userName;
+        child.gameObject.name = KitakuStateId;
+        child.ActiveScreenObject = gameObject;
+        child.parent = gameObject.GetComponent<KitakuSenniManager>();//è¦ªè¦ç´ ã®è©³ç´°æƒ…å ±ã‚’å¾—ã‚‹
 
-        // ƒCƒ“ƒXƒ^ƒ“ƒX‚ğ‚±‚ÌƒIƒuƒWƒFƒNƒg‚Ìq—v‘f‚Æ‚µ‚Äİ’è
+        // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­è¦ç´ ã¨ã—ã¦è¨­å®š
         instance.transform.SetParent(this.transform, false);
         instance.SetActive(true);
 
@@ -169,7 +237,74 @@ public class KitakuSenniManager : MonoBehaviour
 
 
     }
-    //1ˆÈŠO‚Ì•¶š—ñ‚ªŠÜ‚Ü‚ê‚é‚È‚çtrueA‚»‚¤‚Å‚È‚¢‚È‚çfalse‚ğ•Ô‚·ƒƒ\ƒbƒh
+
+    public void KitakuSenniUpdate(string SelectNumber)
+    {
+        //ã‚¸ã‚§ãƒãƒªãƒƒã‚¯Tã®å‹ãŒintã‹stringã‹ã«ã‚ˆã£ã¦å‡¦ç†ã‚’åˆ†ã‘ã‚‹.
+
+
+        //å¸°å®…é·ç§»çŠ¶æ³ã‚’æ›´æ–°
+        KitakuStateId += SelectNumber;
+        IsResult = !IsResult;
+        //ãƒ—ãƒ¬ãƒãƒ–ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç ´æ£„
+        foreach (Transform child in transform)
+
+        {
+            //å­è¦ç´ ã‚’ç ´æ£„
+            Destroy(child.gameObject);
+
+        }
+
+        if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+        {
+            activePrefab = selectorResultPrefab;
+        }
+        else if (!ContainsOtherThanOne(KitakuStateId))
+        {
+            activePrefab = selectorPrefab;
+        }
+        else
+        {
+            activePrefab = ImagePrefab;
+        }
+
+        //ãƒ—ãƒ¬ãƒãƒ–ã‚’åˆæœŸåŒ–ã—ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’åˆæœŸåŒ–ã—ã¦ã„ã‚‹ã‚ˆã†ã«è¦‹ã›ã‹ã‘ã‚‹
+        initiailze?.Invoke(KitakuStateId, userName, IsResult, gameObject);
+
+        // ãƒ—ãƒ¬ãƒãƒ–ã‚’ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹åŒ–
+        GameObject instance = Instantiate(activePrefab, gameObject.transform);
+        RectTransform rectTransform = instance.GetComponent<RectTransform>();
+
+        if (rectTransform != null)
+        {
+            rectTransform.anchorMin = new Vector2(0, 0);
+            rectTransform.anchorMax = new Vector2(1, 1);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+        }
+        else
+        {
+            Debug.LogError("RectTransform component not found on prefab.");
+        }
+
+
+        child = instance.GetComponent<KitakuSenniInitialize>();
+        child.userName = userName;
+        child.gameObject.name = KitakuStateId;
+        child.ActiveScreenObject = gameObject;
+        child.parent = gameObject.GetComponent<KitakuSenniManager>();//è¦ªè¦ç´ ã®è©³ç´°æƒ…å ±ã‚’å¾—ã‚‹
+
+        // ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ã“ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®å­è¦ç´ ã¨ã—ã¦è¨­å®š
+        instance.transform.SetParent(this.transform, false);
+        instance.SetActive(true);
+
+
+
+
+
+    }
+
+    //1ä»¥å¤–ã®æ–‡å­—åˆ—ãŒå«ã¾ã‚Œã‚‹ãªã‚‰trueã€ãã†ã§ãªã„ãªã‚‰falseã‚’è¿”ã™ãƒ¡ã‚½ãƒƒãƒ‰
     public static bool ContainsOtherThanOne(string input)
     {
         foreach (char c in input)
@@ -180,6 +315,13 @@ public class KitakuSenniManager : MonoBehaviour
             }
         }
         return false;
+    }
+
+    public void Initialized(string name, string id)
+    {
+        userName = name;//å‚åŠ è€…ã®æ°åã‚’æ ¼ç´
+        userId = id;//å‚åŠ è€…ã®ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰ã‚’æ ¼ç´
+
     }
 }
 

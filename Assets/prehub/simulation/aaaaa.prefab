@@ -120,8 +120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4ce292c5c74c734abecfd3d9111d60d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userName: D
+  userName: "\u6851\u540D\u5927\u8056"
   ActiveScreenObject: {fileID: 0}
+  parent: {fileID: 0}
+  child: {fileID: 0}
 --- !u!1 &2905058068806094365
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -19,7 +19,7 @@ namespace MyProject
             TextAsset iniFile = Resources.Load<TextAsset>(fileName);
             if (iniFile == null)
             {
-                Debug.LogError("INIƒtƒ@ƒCƒ‹‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ");
+                Debug.LogError("INIãƒ•ã‚¡ã‚¤ãƒ«ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“");
                 return;
             }
 
