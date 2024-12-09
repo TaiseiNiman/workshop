@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using System.Text.RegularExpressions;
 
 public class KitakuSenniManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class KitakuSenniManager : MonoBehaviour
     public GameObject ImagePrefab;//帰宅状況画像の表示画面
     //プレハブの初期化メソッドを追加
     [SerializeField]
-    public UnityEvent<string,string,bool,GameObject> initiailze;
+    public UnityEvent<string, string, bool, GameObject> initiailze;
     //シミュレーション自動終了時に実行されるイベントメソッドを指定
     [SerializeField]
     public UnityEvent simulationOnClose;
@@ -67,67 +68,77 @@ public class KitakuSenniManager : MonoBehaviour
                 else
                 {
                     //
-                    
+
                 }
             }
         }
 
-            //自動遷移を実装する
-            if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+        //自動遷移を実装する
+        if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+        {
+            hour = (KitakuStateId.Length + 11) % 24;
+            day = (KitakuStateId.Length + 11) / 24;
+            //今、リザルト画面を表示しています
+            //12時,13時...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
             {
-                hour = (KitakuStateId.Length + 11) % 24;
-                day = (KitakuStateId.Length + 11) / 24;
-                //今、リザルト画面を表示しています
-                //12時,13時...となったら自動で遷移
-                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
-                {
-                    KitakuSenniUpdate(1);//自動更新
-                }
-
+                KitakuSenniUpdate(1);//自動更新
             }
-            else if (!ContainsOtherThanOne(KitakuStateId))
+
+        }
+        else if (!ContainsOtherThanOne(KitakuStateId))
+        {
+            hour = (KitakuStateId.Length + 10) % 24;
+            day = (KitakuStateId.Length + 10) / 24;
+            //今、帰宅選択画面を表示しています
+            //11時45分,12時45分,...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 45, 0))
             {
-                hour = (KitakuStateId.Length + 10) % 24;
-                day = (KitakuStateId.Length + 10) / 24;
-                //今、帰宅選択画面を表示しています
-                //11時45分,12時45分,...となったら自動で遷移
-                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 45, 0))
-                {
-                
-                if(updateErapsed >= 1.0f)
+
+                if (updateErapsed >= 1.0f)
                 {
                     simulation.onMessage1.AddListener(callbackStatusUpdate);
-                    simulation.SendText($"ACTION:{userId}:{KitakuStateId + status}");//メッセージを送信する
-                    updateErapsed = 0;
-                }
-                //同期処理
-                
-                }
-
-            }
-            else
-            {
-                hour = (KitakuStateId.Length + 10) % 24;
-                day = (KitakuStateId.Length + 10) / 24;
-                //今、帰宅状況の画像を表示しています
-                //11時,12時,...となったら自動で遷移
-                if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
-                {
-                    if (!string.IsNullOrEmpty(KitakuStateId))
+                    if (Regex.IsMatch(hour.ToString(), "^(11|12|14|15|17|18|19|20|21|22)$"))
                     {
-                        num = (int)char.GetNumericValue(KitakuStateId[KitakuStateId.Length - 1]);
-                        Debug.Log($"Character '{KitakuStateId[KitakuStateId.Length - 1]}' converted to int: {num}");
-                        KitakuSenniUpdate(num);
+                        //常に1に自動遷移
+                        simulation.SendText($"ACTION:{userId}:{KitakuStateId}");//メッセージを送信する
                     }
                     else
                     {
-
-                        throw new System.ArgumentException("The string cannot be null or empty.");
+                        //最適なものに自動遷移
+                        simulation.SendText($"ACTION:{userId}:{KitakuStateId + status}");//メッセージを送信する
                     }
 
+                    updateErapsed = 0;
+                }
+                //同期処理
+
+            }
+
+        }
+        else
+        {
+            hour = (KitakuStateId.Length + 10) % 24;
+            day = (KitakuStateId.Length + 10) / 24;
+            //今、帰宅状況の画像を表示しています
+            //11時,12時,...となったら自動で遷移
+            if (current.currentTime > new DateTime(1997, 7, 1 + day, hour, 0, 0))
+            {
+                if (!string.IsNullOrEmpty(KitakuStateId))
+                {
+                    num = (int)char.GetNumericValue(KitakuStateId[KitakuStateId.Length - 1]);
+                    Debug.Log($"Character '{KitakuStateId[KitakuStateId.Length - 1]}' converted to int: {num}");
+                    KitakuSenniUpdate(num);
+                }
+                else
+                {
+
+                    throw new System.ArgumentException("The string cannot be null or empty.");
                 }
 
             }
+
+        }
 
         //24時で会社内に残るを選択した人は自動で画像を表示
         if (current.currentTime > new DateTime(1997, 7, 2, 0, 0, 0) && !ContainsOtherThanOne(KitakuStateId) && !IsResult)
@@ -136,21 +147,21 @@ public class KitakuSenniManager : MonoBehaviour
         }
         //25時で自動的にシミュレーションを終了させる
         if (current.currentTime > new DateTime(1997, 7, 2, 1, 0, 0))
+        {
+            //シミュレーションを終了させるので帰宅状況を破棄する
+            foreach (Transform child in transform)
+
             {
-                //シミュレーションを終了させるので帰宅状況を破棄する
-                foreach (Transform child in transform)
+                //子要素を破棄
+                Destroy(child.gameObject);
 
-                {
-                    //子要素を破棄
-                    Destroy(child.gameObject);
-
-                }
-                //シュミレーションクローズイベントリスナーの実行
-                simulationOnClose?.Invoke();
             }
-        
+            //シュミレーションクローズイベントリスナーの実行
+            simulationOnClose?.Invoke();
+        }
 
-        
+
+
     }
 
     private void callbackStatusUpdate(string messages)//書き込み後そのまま反映させるメソッド
@@ -176,7 +187,7 @@ public class KitakuSenniManager : MonoBehaviour
     public void KitakuSenniUpdate(int SelectNumber)
     {
         //ジェネリックTの型がintかstringかによって処理を分ける.
-        
+
 
         //帰宅遷移状況を更新
         KitakuStateId += SelectNumber == 0 ? string.Empty : SelectNumber.ToString();
@@ -184,13 +195,14 @@ public class KitakuSenniManager : MonoBehaviour
         //プレハブのインスタンスを破棄
         foreach (Transform child in transform)
 
-        { 
-           //子要素を破棄
-           Destroy(child.gameObject);
-            
+        {
+            //子要素を破棄
+            Destroy(child.gameObject);
+
         }
 
-        if (!ContainsOtherThanOne(KitakuStateId) && IsResult) {
+        if (!ContainsOtherThanOne(KitakuStateId) && IsResult)
+        {
             activePrefab = selectorResultPrefab;
         }
         else if (!ContainsOtherThanOne(KitakuStateId))
@@ -203,7 +215,7 @@ public class KitakuSenniManager : MonoBehaviour
         }
 
         //プレハブを初期化しインスタンスを初期化しているように見せかける
-        initiailze?.Invoke(KitakuStateId,userName,IsResult,gameObject);
+        initiailze?.Invoke(KitakuStateId, userName, IsResult, gameObject);
 
         // プレハブをインスタンス化
         GameObject instance = Instantiate(activePrefab, gameObject.transform);
@@ -232,7 +244,7 @@ public class KitakuSenniManager : MonoBehaviour
         instance.transform.SetParent(this.transform, false);
         instance.SetActive(true);
 
-        
+
 
 
 

@@ -103,6 +103,12 @@ public class OnButtonWithErrorMessage : MonoBehaviour
                         MoveSceneNumber = update[update.Length - 1].ToString();
                         break;
                     }
+                case "your selected simulation status was cleared":
+                    {
+                        //クリア時
+                        MoveSceneNumber = null;
+                        break;
+                    }
                 case "Messages are incorrect please <TEST|ACTION>":
                     break;
                 default:

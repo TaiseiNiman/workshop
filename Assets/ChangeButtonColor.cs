@@ -1,20 +1,19 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
 
 public class ChangeButtonColor : MonoBehaviour
 {
     public Button myButton;
-
     public void OnClicked()
     {
-        // 16i”‚ÌFƒR[ƒh‚ğw’è (—á: #FF5733)
+        // 16é€²æ•°ã®è‰²ã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®š (ä¾‹: #FF5733)
         string hexColor = "#ABE1F1";
         Color newColor;
 
-        // ColorUtility.TryParseHtmlString‚ğg‚Á‚Ä16i”‚ÌFƒR[ƒh‚ğColorŒ^‚É•ÏŠ·
+        // ColorUtility.TryParseHtmlStringã‚’ä½¿ã£ã¦16é€²æ•°ã®è‰²ã‚³ãƒ¼ãƒ‰ã‚’Colorå‹ã«å¤‰æ›
         if (ColorUtility.TryParseHtmlString(hexColor, out newColor))
         {
-            // Button‚ÌImageƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌF‚ğ•ÏX
+            // Buttonã®Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è‰²ã‚’å¤‰æ›´
             myButton.image.color = newColor;
         }
         else
@@ -24,14 +23,14 @@ public class ChangeButtonColor : MonoBehaviour
     }
     public void NotClicked()
     {
-        // 16i”‚ÌFƒR[ƒh‚ğw’è (—á: #FF5733)
-        string hexColor = "#FFFFFF";//”wŒiF‚É–ß‚·
+        // 16é€²æ•°ã®è‰²ã‚³ãƒ¼ãƒ‰ã‚’æŒ‡å®š (ä¾‹: #FF5733)
+        string hexColor = "#FFFFFF";//èƒŒæ™¯è‰²ã«æˆ»ã™
         Color newColor;
 
-        // ColorUtility.TryParseHtmlString‚ğg‚Á‚Ä16i”‚ÌFƒR[ƒh‚ğColorŒ^‚É•ÏŠ·
+        // ColorUtility.TryParseHtmlStringã‚’ä½¿ã£ã¦16é€²æ•°ã®è‰²ã‚³ãƒ¼ãƒ‰ã‚’Colorå‹ã«å¤‰æ›
         if (ColorUtility.TryParseHtmlString(hexColor, out newColor))
         {
-            // Button‚ÌImageƒRƒ“ƒ|[ƒlƒ“ƒg‚ÌF‚ğ•ÏX
+            // Buttonã®Imageã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã®è‰²ã‚’å¤‰æ›´
             myButton.image.color = newColor;
         }
         else
