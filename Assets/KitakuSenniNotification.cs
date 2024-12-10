@@ -11,6 +11,7 @@ public class KitakuSenniNotification : MonoBehaviour
     public Image myImage;
     public float elapsedTime = 0f;
     bool limit = false;
+    private float realTime = 0f;
 
     void OnEnable()
     {
@@ -35,66 +36,23 @@ public class KitakuSenniNotification : MonoBehaviour
         DateTime current = currentWatch.currentTime;
         Color currentColor;
 
-        // 経過時間を更新
-        elapsedTime += Time.deltaTime;
-
-        if (current.Hour >= 11 && current.Hour < 13 && current.Minute >= 52.5)
-        {
-            if (!limit)
-            {
-                limit = true;
-                elapsedTime = 0f;//経過時間を初期化
-                currentColor = myImage.color;
+        if(current.Minute >= 52){
+            //1分が実時間何秒か 
+            if(realTime == 0f && current.Minute - 52 > 0 && elapsedTime != 0f){
+            realTime = elapsedTime/(current.Minute - 52);
+            currentColor = myImage.color;
 
                 // アルファ値を変更（0.0fは完全に透明、1.0fは完全に不透明）
                 currentColor.a = 0.5f; // 半透明にする
 
                 // 変更した色をImageコンポーネントに適用
                 myImage.color = currentColor;
-
             }
-            
-        }
-        else if (current.Hour >= 13 && current.Hour < 18 && current.Minute >= 50)
-        {
-            if (!limit)
-            {
-                limit = true;
-                elapsedTime = 0f;//経過時間を初期化
-                currentColor = myImage.color;
+            else if(realTime != 0f){
 
-                // アルファ値を変更（0.0fは完全に透明、1.0fは完全に不透明）
-                currentColor.a = 0.5f; // 半透明にする
-
-                // 変更した色をImageコンポーネントに適用
-                myImage.color = currentColor;
-
+                timerText.text = "残り" + Mathf.FloorToInt(realTime*8 - (current.Minute - 52)*realTime).ToString() + "秒です　　次に進んで下さい.";
             }
-        }
-        else if (current.Hour >= 18 && current.Hour < 24 && current.Minute >= 45)
-        {
-            if (!limit)
-            {
-                limit = true;
-                elapsedTime = 0f;//経過時間を初期化
-                currentColor = myImage.color;
-
-                // アルファ値を変更（0.0fは完全に透明、1.0fは完全に不透明）
-                currentColor.a = 0.5f; // 半透明にする
-
-                // 変更した色をImageコンポーネントに適用
-                myImage.color = currentColor;
-
-            }
-        }
-        else
-        {
-            
-        }
-
-        if (Mathf.FloorToInt(elapsedTime) % 1 == 0 && limit)
-        {
-            timerText.text = "残り" + (15 - Mathf.FloorToInt(elapsedTime)).ToString() + "秒で次の帰宅状況に遷移します";
+            elapsedTime += Time.deltaTime;
         }
 
     }

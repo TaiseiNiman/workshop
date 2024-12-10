@@ -24,7 +24,7 @@ public class snsUpdate : MonoBehaviour
     void Update()
     {
         delta += Time.deltaTime;
-        if (delta >= 0.3f)
+        if (delta >= 0.19f)
         {
             if(point <= length - (scaleLength))
             {

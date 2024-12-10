@@ -7,7 +7,7 @@ public class ChangeButtonColor : MonoBehaviour
     public void OnClicked()
     {
         // 16進数の色コードを指定 (例: #FF5733)
-        string hexColor = "#ABE1F1";
+        string hexColor = "#3A6E98";
         Color newColor;
 
         // ColorUtility.TryParseHtmlStringを使って16進数の色コードをColor型に変換
