@@ -7,6 +7,7 @@ public class OnButtonWithErrorMessage : MonoBehaviour
     public ExampleScript Example;
 
     private UnityEvent<int> move = new UnityEvent<int>();
+    public UnityEvent<string> MoveSceneNumberChanged;
     private string _MoveSceneNumber;
     public string MoveSceneNumber
     {
@@ -17,6 +18,7 @@ public class OnButtonWithErrorMessage : MonoBehaviour
         set
         {
             _MoveSceneNumber = value;
+            MoveSceneNumberChanged?.Invoke(value);
         }
     }//
     public GameObject SceneObject;//

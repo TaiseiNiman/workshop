@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using WebSocketSharp;
 
 public class KitakuSceneButton : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class KitakuSceneButton : MonoBehaviour
     public KitakuSenniInitialize parent;
     public UnityEvent doubleCliked;
     public UnityEvent oneCliked;
+    public UnityEvent invalidClicked;
 
     // Start is called before the first frame update
     public void KitakuSceneMoverOnClick()
@@ -22,13 +24,13 @@ public class KitakuSceneButton : MonoBehaviour
             //選択されているものをもう一度押したときの動作
             message = $"{parent.parent.KitakuStateId}";
             kitakuSelectButtonOnClick?.Invoke("DELETE", parent.parent.userId, message);
-            doubleCliked?.Invoke();
+            //doubleCliked?.Invoke();
         }
         else
         {
             message = $"{parent.parent.KitakuStateId}{gameObject.name}";
             kitakuSelectButtonOnClick?.Invoke("ACTION", parent.parent.userId, message);
-            oneCliked?.Invoke();
+            //oneCliked?.Invoke();
         }
         
         //submitaa.MoveSceneNumber = (gameObject.name == "1")? "0" : gameObject.name;
@@ -41,6 +43,12 @@ public class KitakuSceneButton : MonoBehaviour
     public void TestSuccess(string status)
     {
         if (status == gameObject.name) gameObject.SetActive(true);
+    }
+
+    public void ActionSuccess(string status){
+        if (status.IsNullOrEmpty()) doubleCliked?.Invoke();
+        else if (status == gameObject.name) oneCliked?.Invoke();
+        else invalidClicked?.Invoke();
     }
     void Start()
     {

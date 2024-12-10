@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Rendering;
 
 public class ExampleScript : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class ExampleScript : MonoBehaviour
     private DateTimeSync currentWatch;
 
     public float elapsedTime = 0f;
+
+    private float realTime = 0f;
 
     void OnEnable()
     {
@@ -30,31 +33,16 @@ public class ExampleScript : MonoBehaviour
     {
         currentWatch = GameObject.Find("SimulationWatch").GetComponent<DateTimeSync>();
         DateTime current = currentWatch.currentTime;
-        bool limit = false;
-        // 経過時間を更新
-        elapsedTime += Time.deltaTime;
+        if(current.Minute >= 37){
+            //1分が実時間何秒か 
+            if(realTime == 0f && current.Minute - 37 > 0 && elapsedTime != 0f){
+            realTime = elapsedTime/(current.Minute - 37);
+            }
+            else if(realTime != 0f){
 
-        if (current.Hour >= 11 && current.Hour < 13 && current.Minute > 37.5)
-        {
-            limit = true; // 1時間が実時間2分で進む
+                timerText.text = "残り" + Mathf.FloorToInt(realTime*8 - (current.Minute - 37)*realTime).ToString() + "秒です　　次に進んで下さい.";
+            }
+            elapsedTime += Time.deltaTime;
         }
-        else if (current.Hour >= 13 && current.Hour < 18 && current.Minute > 35)
-        {
-            limit = true; // 1時間が実時間1.5分で進む
-        }
-        else if (current.Hour >= 18 && current.Hour < 24 && current.Minute > 30)
-        {
-            limit = true; // 1時間が実時間1分で進む
-        }
-        else
-        {
-            elapsedTime = 0f;//時刻を初期化
-        }
-
-        if (Mathf.FloorToInt(elapsedTime) % 1 == 0 && limit)
-        {
-            timerText.text = "残り" + (14 - Mathf.FloorToInt(elapsedTime)).ToString() + "秒です　　次に進んで下さい.";
-        }
-
     }
 }
