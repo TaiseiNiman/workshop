@@ -1,48 +1,27 @@
-﻿using UnityEngine;
-using UnityEngine.XR.ARFoundation;
-using UnityEngine.XR.ARSubsystems;
-using System;
+﻿using System;
 using System.Collections;
-using System.Text;
-using System.IO;
-using WebSocketSharp;
 using Unity.Collections;
-using UnityEngine.Events;
+using UnityEngine;
+using UnityEngine.XR.ARSubsystems;
 
-public class WebSocketImageSender : MonoBehaviour
+// JSON送信用のシリアライズ可能なクラス
+[Serializable]
+public class ImagePayload
 {
-    public ARCameraManager arCameraManager;
-    public Camera arUnityCamera;
-    public float sendInterval = 1.0f; // 秒間隔で送信
-    private float timer = 0f;
+    public string image;
+    public string K;
+    public string R;
+    public string t;
+}
 
-    [SerializeField]
-    public UnityEvent<string> SendQueue;
-
-    void Start()
-    {
-        //ws = new WebSocket("ws://YOUR_SERVER_IP:PORT");
-        //ws.OnOpen += (sender, e) => Debug.Log("WebSocket Connected");
-        //ws.OnError += (sender, e) => Debug.Log("WebSocket Error: " + e.Message);
-        //ws.OnClose += (sender, e) => Debug.Log("WebSocket Closed");
-        //ws.Connect();
-    }
-
-    void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer >= sendInterval)
-        {
-            timer = 0f;
-            if (arCameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
-            {
-                StartCoroutine(SendImageAndCameraParams(image));
-            }
-        }
-    }
+public class CameraImageSender : MonoBehaviour
+{
+    public Camera arUnityCamera; // Unity上のARカメラ
+    public Action<string> SendQueue; // JSONを送信するイベント
 
     IEnumerator SendImageAndCameraParams(XRCpuImage image)
     {
+        // --- 画像変換パラメータ設定 ---
         var conversionParams = new XRCpuImage.ConversionParams
         {
             inputRect = new RectInt(0, 0, image.width, image.height),
@@ -51,6 +30,7 @@ public class WebSocketImageSender : MonoBehaviour
             transformation = XRCpuImage.Transformation.None
         };
 
+        // --- 画像データを取得し、JPGへエンコード ---
         var rawData = new NativeArray<byte>(image.GetConvertedDataSize(conversionParams), Allocator.Temp);
         image.Convert(conversionParams, rawData);
         image.Dispose();
@@ -71,16 +51,15 @@ public class WebSocketImageSender : MonoBehaviour
 
         string K = $"{fx},{0},{cx};{0},{fy},{cy};{0},{0},{1}";
 
-        // --- 外部パラメータ行列（R, t） ---
-        Matrix4x4 worldToCam = arUnityCamera.worldToCameraMatrix;
+        // --- 外部パラメータ（カメラ位置と姿勢） ---
         Vector3 camPos = arUnityCamera.transform.position;
         Quaternion camRot = arUnityCamera.transform.rotation;
 
         string T = $"{camPos.x},{camPos.y},{camPos.z}";
         string R = $"{camRot.x},{camRot.y},{camRot.z},{camRot.w}";
 
-        // --- JSON形式でまとめて送信 ---
-        var json = new
+        // --- JSON形式で送信 ---
+        ImagePayload payload = new ImagePayload
         {
             image = Convert.ToBase64String(jpgBytes),
             K = K,
@@ -88,10 +67,10 @@ public class WebSocketImageSender : MonoBehaviour
             t = T
         };
 
-        string jsonStr = JsonUtility.ToJson(json);
+        string jsonStr = JsonUtility.ToJson(payload);
+        Debug.Log("送信JSON: " + jsonStr); // 確認用ログ
         SendQueue?.Invoke(jsonStr);
 
         yield return null;
     }
-
 }
