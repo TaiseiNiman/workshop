@@ -103,6 +103,7 @@ public class WebsocketClientConnecition : MonoBehaviour
         {
             Debug.LogError("Error: " + e.Message);
             Debug.LogError($"WebSocket Error: {e.Message}, Exception: {e.Exception}");
+
             //StartCoroutine(Reconnect(ServerIp, Port));
         };
 
