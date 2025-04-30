@@ -57,20 +57,20 @@ public class CameraImageSender : MonoBehaviour
         float fy = arUnityCamera.projectionMatrix[1, 1];
         float cx = arUnityCamera.pixelWidth / 2f;
         float cy = arUnityCamera.pixelHeight / 2f;
-        string K = $"{fx},0,{cx};0,{fy},{cy};0,0,1";
+        float[][] K = new float[][] { new float[]{ fx, 0, cx }, new float[] { 0, fy, cy }, new float[] { 0, 0, 1 } };
 
         // カメラ外部パラメータ
         Vector3 camPos = arUnityCamera.transform.position;
         Quaternion camRot = arUnityCamera.transform.rotation;
-        string T = $"{camPos.x},{camPos.y},{camPos.z}";
-        string R = $"{camRot.x},{camRot.y},{camRot.z},{camRot.w}";
+        float[] T = { camPos.x, camPos.y, camPos.z };
+        float[] R = { camRot.x, camRot.y, camRot.z, camRot.w };//回転を表す四元数qの各成分
 
         ImagePayload payload = new ImagePayload
         {
             image = Convert.ToBase64String(jpgBytes),
-            K = K,
-            R = R,
-            t = T
+            K = JsonUtility.ToJson(K),
+            R = JsonUtility.ToJson(R),
+            t = JsonUtility.ToJson(T)
         };
 
         string jsonStr = JsonUtility.ToJson(payload);

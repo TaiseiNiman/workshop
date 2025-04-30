@@ -621,9 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff1a03402deb5449bbd2e3d35da2f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arCameraManager: {fileID: 1070965409}
   arUnityCamera: {fileID: 1070965411}
-  sendInterval: 1
+  cameraManager: {fileID: 1070965409}
   SendQueue:
     m_PersistentCalls:
       m_Calls:
