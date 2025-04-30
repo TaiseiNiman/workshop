@@ -88,6 +88,8 @@ public class WebsocketClientConnecition : MonoBehaviour
         {
             Debug.Log("Connection open!");
             isConnecting = true;
+            //識別IDをサーバーに送信
+            SendText("{'meta':'clientsId','contents':'camera'}");
         };
 
         ws.OnMessage += (sender, e) =>

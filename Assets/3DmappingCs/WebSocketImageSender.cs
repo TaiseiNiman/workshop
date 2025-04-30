@@ -14,20 +14,24 @@ public class CameraImageSender : MonoBehaviour
     public ARCameraManager cameraManager;
     [SerializeField]
     public UnityEvent<string> SendQueue;
-    private void Start()
+    public void DelaySub(string jsonStr)
     {
-        StartCoroutine(CaptureAndSendLoop());
+        StartCoroutine(CaptureAndSendLoop(jsonStr));
     }
 
-    IEnumerator CaptureAndSendLoop()
+    IEnumerator CaptureAndSendLoop(string jsonStr)
     {
-        while (true)
-        {
-            if (cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
+        Dictionary<string,object> json = JsonConvert.DeserializeObject<Dictionary<string,object>>(jsonStr);
+        if (json["meta"].ToString() == "delay") {
+            int delay = int.Parse(json["contents"].ToString());
+            while (true)
             {
-                yield return StartCoroutine(SendImageAndCameraParams(image));
+                if (cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
+                {
+                    yield return StartCoroutine(SendImageAndCameraParams(image));
+                }
+                yield return new WaitForSeconds(delay); // n秒おき
             }
-            yield return new WaitForSeconds(2.0f); // 1秒おき
         }
     }
 
@@ -58,7 +62,7 @@ public class CameraImageSender : MonoBehaviour
         float fy = arUnityCamera.projectionMatrix[1, 1];
         float cx = arUnityCamera.pixelWidth / 2f;
         float cy = arUnityCamera.pixelHeight / 2f;
-        float[][] K = new float[][] { new float[]{ fx, 0, cx }, new float[] { 0, fy, cy }, new float[] { 0, 0, 1 } };
+        float[][] K = new float[][] { new float[] { fx, 0, cx }, new float[] { 0, fy, cy }, new float[] { 0, 0, 1 } };
 
         // カメラ外部パラメータ
         Vector3 camPos = arUnityCamera.transform.position;
@@ -66,14 +70,23 @@ public class CameraImageSender : MonoBehaviour
         float[] T = { camPos.x, camPos.y, camPos.z };
         float[] R = { camRot.x, camRot.y, camRot.z, camRot.w };//回転を表す四元数qの各成分
 
+        //var payload = new Dictionary<string, object>
+        //{
+        //    { "image" , Convert.ToBase64String(jpgBytes) },
+        //    { "K" , K },
+        //    { "R" , R },
+        //    { "t" , T }
+        //};
         var payload = new Dictionary<string, object>
         {
+            {"contents", new Dictionary<string, object>{
             { "image" , Convert.ToBase64String(jpgBytes) },
             { "K" , K },
             { "R" , R },
-            { "t" , T }
+            { "t" , T } }
+            },
+            {"meta", "3Ddata" }
         };
-
         string jsonStr = JsonConvert.SerializeObject(payload);
         SendQueue?.Invoke(jsonStr);
 
