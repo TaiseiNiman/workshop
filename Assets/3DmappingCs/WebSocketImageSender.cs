@@ -5,7 +5,8 @@ using Unity.Collections;
 using System;
 using System.Collections;
 using UnityEngine.Events;
-
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 public class CameraImageSender : MonoBehaviour
 {
@@ -65,15 +66,15 @@ public class CameraImageSender : MonoBehaviour
         float[] T = { camPos.x, camPos.y, camPos.z };
         float[] R = { camRot.x, camRot.y, camRot.z, camRot.w };//回転を表す四元数qの各成分
 
-        ImagePayload payload = new ImagePayload
+        var payload = new Dictionary<string, object>
         {
-            image = Convert.ToBase64String(jpgBytes),
-            K = JsonUtility.ToJson(K),
-            R = JsonUtility.ToJson(R),
-            t = JsonUtility.ToJson(T)
+            { "image" , Convert.ToBase64String(jpgBytes) },
+            { "K" , K },
+            { "R" , R },
+            { "t" , T }
         };
 
-        string jsonStr = JsonUtility.ToJson(payload);
+        string jsonStr = JsonConvert.SerializeObject(payload);
         SendQueue?.Invoke(jsonStr);
 
         yield return null;
