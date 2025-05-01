@@ -21,8 +21,9 @@ public class CameraImageSender : MonoBehaviour
 
     IEnumerator CaptureAndSendLoop(string jsonStr)
     {
-        Dictionary<string,object> json = JsonConvert.DeserializeObject<Dictionary<string,object>>(jsonStr);
-        if (json["meta"].ToString() == "delay") {
+        Dictionary<string, object> json = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonStr);
+        if (json["meta"].ToString() == "delay")
+        {
             int delay = int.Parse(json["contents"].ToString());
             while (true)
             {
