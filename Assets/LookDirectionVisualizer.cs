@@ -25,12 +25,12 @@ public class LookDirectionVisualizer : MonoBehaviour
         // === カメラの上方向 ===
         Vector3 up = camRot * Vector3.up;
 
-        // === 矢印の位置 ===
-        arrow.position = camPos;
+        //// === 矢印の位置 ===
+        //arrow.position = camPos;
 
-        // === 矢印の姿勢 ===
-        // LookRotation(forward, up) でロールも含める
-        arrow.rotation = Quaternion.LookRotation(forward, up);
+        //// === 矢印の姿勢 ===
+        //// LookRotation(forward, up) でロールも含める
+        //arrow.rotation = Quaternion.LookRotation(forward, up);
 
         // === HUD 更新 ===
         if (hudText != null)

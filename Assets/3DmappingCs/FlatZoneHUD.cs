@@ -45,15 +45,20 @@ public class FlatZoneHUD : MonoBehaviour
         payload["contents"] = contentsArray;
         payload["meta"] = "3Ddata";
 
-        // 全部そろったらサーバ送信
-        if (contentsArray.Count >= x * y)
-        {
-            string jsonStr = JsonConvert.SerializeObject(payload);
-            SendQueue?.Invoke(jsonStr);
-            contentsArray.Clear();
-        }
+        //// 全部そろったらサーバ送信
+        //if (contentsArray.Count >= x * y)
+        //{
+        //    string jsonStr = JsonConvert.SerializeObject(payload);
+        //    SendQueue?.Invoke(jsonStr);
+        //    contentsArray.Clear();
+        //}
     }
 
+    public void imageSubmit()
+    {
+        string jsonStr = JsonConvert.SerializeObject(payload);
+        SendQueue?.Invoke(jsonStr);
+    }
 
     void initializee(int x, int y)
     {
@@ -87,32 +92,41 @@ public class FlatZoneHUD : MonoBehaviour
         }
     }
 
+    //public void Zoneing(string json)
+    //{
+    //    ZoneingParams p = JsonConvert.DeserializeObject<ZoneingParams>(json);
+    //    Debug.Log($"phi: {p.phi}, theta: {p.theta}, x: {p.x}, y: {p.y}");
+    //    Debug.Log($"K: {p.K}, R: {p.R}, T: {p.T}");
+    //    //canvasの初期化
+    //    if (initial == 0) { 
+    //        initializee(p.x, p.y);
+    //        initial = 1;
+    //    }
+    //    //ゾーニングの計算
+    //    if (p.theta < 0) p.theta += 2 * Mathf.PI;
+
+    //    int n = Mathf.FloorToInt(p.theta / (2 * Mathf.PI) * p.x);
+    //    int m = Mathf.FloorToInt(p.phi / Mathf.PI * p.y);
+
+    //    n = Mathf.Clamp(n, 0, p.x - 1);
+    //    m = Mathf.Clamp(m, 0, p.y - 1);
+
+    //    if (!zoneCompleted[n, m])
+    //    {
+    //        //ゾーンに静止画を割り当て
+    //        AddPayload(p.jpgBase64, p.K, p.R, p.T, p.x, p.y);
+    //        zoneCompleted[n, m] = true;
+    //        zones[n, m].color = Color.green;
+    //        Debug.Log($"ゾーン({n},{m}) を完了");
+    //    }
+    //}
+
     public void Zoneing(string json)
     {
         ZoneingParams p = JsonConvert.DeserializeObject<ZoneingParams>(json);
         Debug.Log($"phi: {p.phi}, theta: {p.theta}, x: {p.x}, y: {p.y}");
         Debug.Log($"K: {p.K}, R: {p.R}, T: {p.T}");
-        //canvasの初期化
-        if (initial == 0) { 
-            initializee(p.x, p.y);
-            initial = 1;
-        }
-        //ゾーニングの計算
-        if (p.theta < 0) p.theta += 2 * Mathf.PI;
-
-        int n = Mathf.FloorToInt(p.theta / (2 * Mathf.PI) * p.x);
-        int m = Mathf.FloorToInt(p.phi / Mathf.PI * p.y);
-
-        n = Mathf.Clamp(n, 0, p.x - 1);
-        m = Mathf.Clamp(m, 0, p.y - 1);
-
-        if (!zoneCompleted[n, m])
-        {
-            //ゾーンに静止画を割り当て
-            AddPayload(p.jpgBase64, p.K, p.R, p.T, p.x, p.y);
-            zoneCompleted[n, m] = true;
-            zones[n, m].color = Color.green;
-            Debug.Log($"ゾーン({n},{m}) を完了");
-        }
+        AddPayload(p.jpgBase64, p.K, p.R, p.T, p.x, p.y);
     }
+
 }
