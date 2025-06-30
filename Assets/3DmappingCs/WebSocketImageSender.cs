@@ -51,7 +51,7 @@ public class CameraImageSender : MonoBehaviour
         Dictionary<string, object> json = JsonConvert.DeserializeObject<Dictionary<string, object>>(jsonStr);
         if (json["meta"].ToString() == "delay")
         {
-            int delay = int.Parse(json["contents"].ToString());
+            float delay = float.Parse(json["contents"].ToString());
             while (true)
             {
                 if (cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
